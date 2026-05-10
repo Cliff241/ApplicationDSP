@@ -1,68 +1,241 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>DSP Personnel</title>
-    <link rel="stylesheet" href="/styles.css">
-  </head>
-  <body>
-    <div id="loginScreen" class="login-shell">
-      <main class="login-panel">
-        <div class="brand-mark">DSP</div>
-        <h1>Management du Personnel</h1>
-        <p class="muted">Connexion securisee aux donnees operationnelles.</p>
-        <form id="loginForm" class="stack">
-          <label>Adresse e-mail
-            <input name="email" type="email" autocomplete="username" value="admin@dsp.local" required>
-          </label>
-          <label>Mot de passe
-            <input name="password" type="password" autocomplete="current-password" value="Admin@123" required>
-          </label>
-          <button class="primary full" type="submit">Se connecter</button>
-          <p id="loginError" class="error"></p>
-        </form>
-      </main>
-    </div>
-
-    <div id="appShell" class="app-shell hidden">
-      <aside class="sidebar">
-        <div class="side-brand">
-          <strong>DSP</strong>
-          <span>Personnel</span>
-        </div>
-        <nav id="mainNav"></nav>
-      </aside>
-
-      <section class="workspace">
-        <header class="topbar">
-          <div>
-            <p class="eyebrow" id="todayLabel"></p>
-            <h2 id="viewTitle">Tableau de bord</h2>
-          </div>
-          <div class="top-actions">
-            <input id="globalSearch" type="search" placeholder="Recherche matricule, nom, unite...">
-            <button id="logoutBtn" class="ghost">Deconnexion</button>
-          </div>
-        </header>
-
-        <div id="toast" class="toast hidden"></div>
-        <main id="view"></main>
-      </section>
-    </div>
-
-    <template id="modalTemplate">
-      <div class="modal-backdrop">
-        <section class="modal">
-          <header>
-            <h3></h3>
-            <button class="icon-btn" data-close title="Fermer">X</button>
-          </header>
-          <div class="modal-body"></div>
-        </section>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DSP - Management du Personnel</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="min-h-screen bg-slate-100 text-slate-900">
+  <div id="loginPage" class="min-h-screen flex items-center justify-center p-6">
+    <div class="w-full max-w-md bg-white rounded-2xl shadow-xl p-8">
+      <div class="mb-6">
+        <p class="text-sm font-semibold text-blue-700">DSP</p>
+        <h1 class="text-3xl font-bold mt-2">Management du Personnel</h1>
+        <p class="text-slate-500 mt-2">Connexion sécurisée aux données opérationnelles.</p>
       </div>
-    </template>
 
-    <script src="/app.js"></script>
-  </body>
+      <form id="loginForm" class="space-y-4">
+        <div>
+          <label class="block text-sm font-medium mb-1">Adresse e-mail</label>
+          <input
+            id="email"
+            type="email"
+            value="admin@dsp.local"
+            required
+            class="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium mb-1">Mot de passe</label>
+          <input
+            id="password"
+            type="password"
+            required
+            class="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
+          />
+        </div>
+
+        <p id="loginError" class="hidden text-sm text-red-600"></p>
+
+        <button
+          type="submit"
+          class="w-full rounded-xl bg-blue-700 text-white py-3 font-semibold hover:bg-blue-800 transition"
+        >
+          Se connecter
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div id="dashboardPage" class="hidden min-h-screen">
+    <header class="bg-white border-b border-slate-200 px-6 py-4 flex justify-between items-center">
+      <div>
+        <p class="text-sm font-semibold text-blue-700">DSP Personnel</p>
+        <h2 class="text-2xl font-bold">Tableau de bord</h2>
+      </div>
+
+      <button
+        id="logoutBtn"
+        class="rounded-xl border border-slate-300 px-4 py-2 hover:bg-slate-100"
+      >
+        Déconnexion
+      </button>
+    </header>
+
+    <main class="p-6">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+        <div class="bg-white rounded-2xl shadow p-5">
+          <p class="text-slate-500">Effectif total</p>
+          <p id="totalAgents" class="text-3xl font-bold mt-2">0</p>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow p-5">
+          <p class="text-slate-500">Actifs</p>
+          <p id="activeAgents" class="text-3xl font-bold mt-2">0</p>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow p-5">
+          <p class="text-slate-500">Présents</p>
+          <p id="presentAgents" class="text-3xl font-bold mt-2">0</p>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow p-5">
+          <p class="text-slate-500">Absences injustifiées</p>
+          <p id="unjustifiedAgents" class="text-3xl font-bold mt-2">0</p>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl shadow p-5">
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-4">
+          <h3 class="text-xl font-bold">Effectif</h3>
+          <input
+            id="search"
+            type="search"
+            placeholder="Recherche matricule, nom, grade, unité..."
+            class="rounded-xl border border-slate-300 px-4 py-2 w-full md:w-96"
+          />
+        </div>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr class="border-b bg-slate-50">
+                <th class="p-3">Matricule</th>
+                <th class="p-3">Nom</th>
+                <th class="p-3">Prénom</th>
+                <th class="p-3">Grade</th>
+                <th class="p-3">Unité</th>
+                <th class="p-3">Statut</th>
+                <th class="p-3">Position</th>
+              </tr>
+            </thead>
+            <tbody id="agentsTable"></tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    let allAgents = [];
+
+    const loginPage = document.getElementById("loginPage");
+    const dashboardPage = document.getElementById("dashboardPage");
+    const loginForm = document.getElementById("loginForm");
+    const loginError = document.getElementById("loginError");
+    const logoutBtn = document.getElementById("logoutBtn");
+    const search = document.getElementById("search");
+
+    loginForm.addEventListener("submit", async function (event) {
+      event.preventDefault();
+
+      loginError.classList.add("hidden");
+      loginError.textContent = "";
+
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+
+      try {
+        const response = await fetch("/api/auth/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({ email, password })
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+          loginError.textContent = result.error || "Connexion impossible.";
+          loginError.classList.remove("hidden");
+          return;
+        }
+
+        await loadDashboard();
+      } catch (error) {
+        loginError.textContent = "Erreur réseau. Vérifie le serveur.";
+        loginError.classList.remove("hidden");
+      }
+    });
+
+    async function loadDashboard() {
+      const response = await fetch("/api/bootstrap");
+      const result = await response.json();
+
+      if (!response.ok) {
+        loginPage.classList.remove("hidden");
+        dashboardPage.classList.add("hidden");
+        return;
+      }
+
+      allAgents = result.agents || [];
+
+      document.getElementById("totalAgents").textContent = result.stats.total;
+      document.getElementById("activeAgents").textContent = result.stats.active;
+      document.getElementById("presentAgents").textContent = result.stats.present;
+      document.getElementById("unjustifiedAgents").textContent = result.stats.unjustified;
+
+      renderAgents(allAgents);
+
+      loginPage.classList.add("hidden");
+      dashboardPage.classList.remove("hidden");
+    }
+
+    function renderAgents(agents) {
+      const tbody = document.getElementById("agentsTable");
+
+      if (!agents.length) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="7" class="p-4 text-center text-slate-500">
+              Aucun agent trouvé.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = agents.map(agent => `
+        <tr class="border-b hover:bg-slate-50">
+          <td class="p-3 font-semibold">${agent.matricule}</td>
+          <td class="p-3">${agent.lastName}</td>
+          <td class="p-3">${agent.firstName}</td>
+          <td class="p-3">${agent.grade}</td>
+          <td class="p-3">${agent.unit}</td>
+          <td class="p-3">${agent.status}</td>
+          <td class="p-3">${agent.position}</td>
+        </tr>
+      `).join("");
+    }
+
+    search.addEventListener("input", function () {
+      const q = search.value.toLowerCase();
+
+      const filtered = allAgents.filter(agent => {
+        return [
+          agent.matricule,
+          agent.lastName,
+          agent.firstName,
+          agent.grade,
+          agent.unit,
+          agent.status,
+          agent.position
+        ].join(" ").toLowerCase().includes(q);
+      });
+
+      renderAgents(filtered);
+    });
+
+    logoutBtn.addEventListener("click", async function () {
+      await fetch("/api/auth/logout", { method: "POST" });
+      dashboardPage.classList.add("hidden");
+      loginPage.classList.remove("hidden");
+    });
+
+    loadDashboard();
+  </script>
+</body>
 </html>
