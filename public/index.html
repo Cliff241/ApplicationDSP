@@ -3,141 +3,143 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>DSP - Management du Personnel</title>
+  <title>DSP Police - Management du Personnel</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
 <body class="min-h-screen bg-slate-100 text-slate-900">
-  <!-- CONNEXION -->
-  <div id="loginPage" class="min-h-screen flex items-center justify-center p-6 bg-slate-100">
-    <div class="w-full max-w-md bg-white rounded-2xl shadow-xl p-8">
-      <p class="text-sm font-semibold text-blue-700">DSP POLICE</p>
-      <h1 class="text-3xl font-bold mt-2">Management du Personnel</h1>
+  <!-- PAGE CONNEXION -->
+  <section id="loginPage" class="min-h-screen flex items-center justify-center p-6">
+    <div class="w-full max-w-md bg-white rounded-2xl shadow-xl p-8 border border-slate-200">
+      <p class="text-sm font-bold text-blue-700">DSP POLICE</p>
+      <h1 class="text-3xl font-black mt-2">Management du Personnel</h1>
       <p class="text-slate-500 mt-2 mb-6">Connexion sécurisée aux données opérationnelles.</p>
 
       <form id="loginForm" class="space-y-4">
         <div>
-          <label class="block text-sm font-medium mb-1">Adresse e-mail</label>
+          <label class="block text-sm font-semibold mb-1">Adresse e-mail</label>
           <input id="email" type="email" value="admin@dsp.local" required
-            class="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500" />
+            class="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none focus:ring-2 focus:ring-blue-600" />
         </div>
 
         <div>
-          <label class="block text-sm font-medium mb-1">Mot de passe</label>
+          <label class="block text-sm font-semibold mb-1">Mot de passe</label>
           <input id="password" type="password" required
-            class="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500" />
+            class="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none focus:ring-2 focus:ring-blue-600" />
         </div>
 
-        <p id="loginError" class="hidden text-sm text-red-600"></p>
+        <p id="loginError" class="hidden rounded-xl bg-red-50 text-red-700 px-4 py-3 text-sm"></p>
 
         <button type="submit"
-          class="w-full rounded-xl bg-blue-700 text-white py-3 font-semibold hover:bg-blue-800 transition">
+          class="w-full rounded-xl bg-blue-700 text-white py-3 font-bold hover:bg-blue-800 transition">
           Se connecter
         </button>
       </form>
     </div>
-  </div>
+  </section>
 
   <!-- APPLICATION -->
-  <div id="appPage" class="hidden min-h-screen">
+  <section id="appPage" class="hidden min-h-screen">
     <div class="flex min-h-screen">
-      <!-- SIDEBAR -->
-      <aside class="hidden lg:flex lg:w-72 bg-slate-950 text-white flex-col">
+      <!-- MENU LATERAL -->
+      <aside class="hidden lg:flex w-72 bg-slate-950 text-white flex-col">
         <div class="p-6 border-b border-slate-800">
-          <p class="text-sm text-blue-300 font-semibold">DSP POLICE</p>
-          <h2 class="text-2xl font-bold">Personnel</h2>
+          <p class="text-sm font-bold text-blue-300">DSP POLICE</p>
+          <h2 class="text-2xl font-black">Personnel</h2>
         </div>
 
         <nav class="flex-1 p-4 space-y-2">
-          <button onclick="showSection('dashboard')" class="navBtn w-full text-left px-4 py-3 rounded-xl hover:bg-slate-800 bg-slate-800">
-            Tableau de bord
-          </button>
-          <button onclick="showSection('agents')" class="navBtn w-full text-left px-4 py-3 rounded-xl hover:bg-slate-800">
-            Effectif
-          </button>
-          <button onclick="showSection('attendance')" class="navBtn w-full text-left px-4 py-3 rounded-xl hover:bg-slate-800">
-            Fiche d’appel
-          </button>
-          <button onclick="showSection('rotations')" class="navBtn w-full text-left px-4 py-3 rounded-xl hover:bg-slate-800">
-            Rotations
-          </button>
-          <button onclick="showSection('documents')" class="navBtn w-full text-left px-4 py-3 rounded-xl hover:bg-slate-800">
-            Documents
-          </button>
-          <button onclick="showSection('alerts')" class="navBtn w-full text-left px-4 py-3 rounded-xl hover:bg-slate-800">
-            Alertes
-          </button>
-          <button onclick="showSection('logs')" class="navBtn w-full text-left px-4 py-3 rounded-xl hover:bg-slate-800">
-            Historique
-          </button>
+          <button data-section="dashboard" class="navBtn w-full text-left px-4 py-3 rounded-xl bg-slate-800 hover:bg-slate-800">Tableau de bord</button>
+          <button data-section="agents" class="navBtn w-full text-left px-4 py-3 rounded-xl hover:bg-slate-800">Effectif</button>
+          <button data-section="attendance" class="navBtn w-full text-left px-4 py-3 rounded-xl hover:bg-slate-800">Fiche d’appel</button>
+          <button data-section="rotations" class="navBtn w-full text-left px-4 py-3 rounded-xl hover:bg-slate-800">Rotations</button>
+          <button data-section="documents" class="navBtn w-full text-left px-4 py-3 rounded-xl hover:bg-slate-800">Documents</button>
+          <button data-section="alerts" class="navBtn w-full text-left px-4 py-3 rounded-xl hover:bg-slate-800">Alertes</button>
+          <button data-section="users" class="navBtn w-full text-left px-4 py-3 rounded-xl hover:bg-slate-800">Utilisateurs</button>
+          <button data-section="logs" class="navBtn w-full text-left px-4 py-3 rounded-xl hover:bg-slate-800">Historique</button>
         </nav>
 
         <div class="p-4 border-t border-slate-800">
-          <button id="logoutBtn" class="w-full rounded-xl bg-white text-slate-950 px-4 py-3 font-semibold hover:bg-slate-200">
+          <button id="logoutBtn" class="w-full rounded-xl bg-white text-slate-950 px-4 py-3 font-bold hover:bg-slate-200">
             Déconnexion
           </button>
         </div>
       </aside>
 
-      <!-- CONTENU -->
-      <div class="flex-1">
-        <header class="bg-white border-b border-slate-200 px-6 py-4 flex justify-between items-center">
+      <!-- CONTENU PRINCIPAL -->
+      <div class="flex-1 min-w-0">
+        <header class="bg-white border-b border-slate-200 px-6 py-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
-            <p class="text-sm font-semibold text-blue-700">DSP Personnel</p>
-            <h1 id="pageTitle" class="text-2xl font-bold">Tableau de bord</h1>
+            <p class="text-sm font-bold text-blue-700">DSP Personnel</p>
+            <h1 id="pageTitle" class="text-2xl font-black">Tableau de bord</h1>
           </div>
 
-          <div class="flex items-center gap-3">
-            <button onclick="downloadExport()" class="hidden md:inline-flex rounded-xl bg-slate-900 text-white px-4 py-2 font-semibold hover:bg-slate-800">
+          <div class="flex flex-wrap gap-2">
+            <select id="mobileNav" class="lg:hidden rounded-xl border border-slate-300 px-4 py-2">
+              <option value="dashboard">Tableau de bord</option>
+              <option value="agents">Effectif</option>
+              <option value="attendance">Fiche d’appel</option>
+              <option value="rotations">Rotations</option>
+              <option value="documents">Documents</option>
+              <option value="alerts">Alertes</option>
+              <option value="users">Utilisateurs</option>
+              <option value="logs">Historique</option>
+            </select>
+
+            <button id="exportBtn" class="rounded-xl bg-slate-900 text-white px-4 py-2 font-bold hover:bg-slate-800">
               Export CSV
             </button>
-            <button onclick="logout()" class="lg:hidden rounded-xl border border-slate-300 px-4 py-2 hover:bg-slate-100">
+
+            <button id="logoutBtnMobile" class="lg:hidden rounded-xl border border-slate-300 px-4 py-2 font-bold hover:bg-slate-100">
               Déconnexion
             </button>
           </div>
         </header>
 
-        <main class="p-6">
-          <!-- DASHBOARD -->
-          <section id="dashboardSection" class="section">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-              <div class="bg-white rounded-2xl shadow p-5">
+        <main class="p-6 space-y-6">
+          <!-- TABLEAU DE BORD -->
+          <section id="dashboardSection" class="appSection">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+              <div class="bg-white rounded-2xl shadow p-5 border border-slate-200">
                 <p class="text-slate-500">Effectif total</p>
-                <p id="totalAgents" class="text-3xl font-bold mt-2">0</p>
+                <p id="totalAgents" class="text-4xl font-black mt-2">0</p>
               </div>
-              <div class="bg-white rounded-2xl shadow p-5">
+
+              <div class="bg-white rounded-2xl shadow p-5 border border-slate-200">
                 <p class="text-slate-500">Actifs</p>
-                <p id="activeAgents" class="text-3xl font-bold mt-2">0</p>
+                <p id="activeAgents" class="text-4xl font-black mt-2">0</p>
               </div>
-              <div class="bg-white rounded-2xl shadow p-5">
+
+              <div class="bg-white rounded-2xl shadow p-5 border border-slate-200">
                 <p class="text-slate-500">Présents</p>
-                <p id="presentAgents" class="text-3xl font-bold mt-2">0</p>
+                <p id="presentAgents" class="text-4xl font-black mt-2">0</p>
               </div>
-              <div class="bg-white rounded-2xl shadow p-5">
+
+              <div class="bg-white rounded-2xl shadow p-5 border border-slate-200">
                 <p class="text-slate-500">Absences injustifiées</p>
-                <p id="unjustifiedAgents" class="text-3xl font-bold mt-2">0</p>
+                <p id="unjustifiedAgents" class="text-4xl font-black mt-2">0</p>
               </div>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <div class="bg-white rounded-2xl shadow p-5">
-                <h3 class="text-xl font-bold mb-4">Répartition par unité</h3>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+              <div class="bg-white rounded-2xl shadow p-5 border border-slate-200">
+                <h3 class="text-xl font-black mb-4">Répartition par unité</h3>
                 <div id="unitStats" class="space-y-3"></div>
               </div>
 
-              <div class="bg-white rounded-2xl shadow p-5">
-                <h3 class="text-xl font-bold mb-4">Actions rapides</h3>
+              <div class="bg-white rounded-2xl shadow p-5 border border-slate-200">
+                <h3 class="text-xl font-black mb-4">Actions rapides</h3>
                 <div class="flex flex-wrap gap-3">
-                  <button onclick="openAddAgentModal()" class="rounded-xl bg-blue-700 text-white px-4 py-2 font-semibold hover:bg-blue-800">
+                  <button data-open-agent class="rounded-xl bg-blue-700 text-white px-4 py-2 font-bold hover:bg-blue-800">
                     + Ajouter agent
                   </button>
-                  <button onclick="showSection('attendance')" class="rounded-xl bg-emerald-600 text-white px-4 py-2 font-semibold hover:bg-emerald-700">
+                  <button data-goto="attendance" class="rounded-xl bg-emerald-600 text-white px-4 py-2 font-bold hover:bg-emerald-700">
                     Fiche d’appel
                   </button>
-                  <button onclick="showSection('rotations')" class="rounded-xl bg-purple-600 text-white px-4 py-2 font-semibold hover:bg-purple-700">
+                  <button data-goto="rotations" class="rounded-xl bg-purple-600 text-white px-4 py-2 font-bold hover:bg-purple-700">
                     Rotation
                   </button>
-                  <button onclick="showSection('documents')" class="rounded-xl bg-amber-500 text-white px-4 py-2 font-semibold hover:bg-amber-600">
+                  <button data-goto="documents" class="rounded-xl bg-amber-500 text-white px-4 py-2 font-bold hover:bg-amber-600">
                     Document
                   </button>
                 </div>
@@ -145,23 +147,24 @@
             </div>
           </section>
 
-          <!-- AGENTS -->
-          <section id="agentsSection" class="section hidden">
-            <div class="bg-white rounded-2xl shadow p-5">
-              <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-4">
-                <h3 class="text-xl font-bold">Effectif</h3>
+          <!-- EFFECTIF -->
+          <section id="agentsSection" class="appSection hidden">
+            <div class="bg-white rounded-2xl shadow p-5 border border-slate-200">
+              <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4 mb-4">
+                <h3 class="text-xl font-black">Effectif</h3>
 
                 <div class="flex flex-col md:flex-row gap-3">
-                  <input id="search" type="search" placeholder="Recherche matricule, nom, grade, unité..."
+                  <input id="searchAgents" type="search" placeholder="Recherche matricule, nom, grade, unité..."
                     class="rounded-xl border border-slate-300 px-4 py-2 w-full md:w-96" />
-                  <button onclick="openAddAgentModal()" class="rounded-xl bg-blue-700 text-white px-4 py-2 font-semibold hover:bg-blue-800">
+
+                  <button data-open-agent class="rounded-xl bg-blue-700 text-white px-4 py-2 font-bold hover:bg-blue-800">
                     + Ajouter
                   </button>
                 </div>
               </div>
 
               <div class="overflow-x-auto">
-                <table class="w-full text-left border-collapse">
+                <table class="w-full text-left">
                   <thead>
                     <tr class="border-b bg-slate-50">
                       <th class="p-3">Matricule</th>
@@ -181,10 +184,10 @@
           </section>
 
           <!-- FICHE D'APPEL -->
-          <section id="attendanceSection" class="section hidden">
-            <div class="bg-white rounded-2xl shadow p-5">
-              <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 mb-4">
-                <h3 class="text-xl font-bold">Fiche d’appel numérique</h3>
+          <section id="attendanceSection" class="appSection hidden">
+            <div class="bg-white rounded-2xl shadow p-5 border border-slate-200">
+              <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
+                <h3 class="text-xl font-black">Fiche d’appel numérique</h3>
                 <input id="attendanceDate" type="date" class="rounded-xl border border-slate-300 px-4 py-2" />
               </div>
 
@@ -203,8 +206,8 @@
                 </table>
               </div>
 
-              <div class="mt-4 flex justify-end">
-                <button onclick="saveAttendance()" class="rounded-xl bg-emerald-600 text-white px-5 py-3 font-semibold hover:bg-emerald-700">
+              <div class="mt-5 flex justify-end">
+                <button id="saveAttendanceBtn" class="rounded-xl bg-emerald-600 text-white px-5 py-3 font-bold hover:bg-emerald-700">
                   Valider la fiche d’appel
                 </button>
               </div>
@@ -212,17 +215,17 @@
           </section>
 
           <!-- ROTATIONS -->
-          <section id="rotationsSection" class="section hidden">
+          <section id="rotationsSection" class="appSection hidden">
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              <div class="bg-white rounded-2xl shadow p-5">
-                <h3 class="text-xl font-bold mb-4">Planifier une rotation</h3>
+              <div class="bg-white rounded-2xl shadow p-5 border border-slate-200">
+                <h3 class="text-xl font-black mb-4">Planifier une rotation</h3>
 
                 <form id="rotationForm" class="space-y-3">
-                  <input id="weekStart" type="date" required class="w-full rounded-xl border px-4 py-2" />
-                  <input id="team" placeholder="Équipe ex: Alpha" required class="w-full rounded-xl border px-4 py-2" />
-                  <input id="rotationUnit" placeholder="Unité" required class="w-full rounded-xl border px-4 py-2" />
+                  <input id="weekStart" type="date" required class="w-full rounded-xl border border-slate-300 px-4 py-2" />
+                  <input id="team" placeholder="Équipe ex: Alpha" required class="w-full rounded-xl border border-slate-300 px-4 py-2" />
+                  <input id="rotationUnit" placeholder="Unité" required class="w-full rounded-xl border border-slate-300 px-4 py-2" />
 
-                  <select id="day" class="w-full rounded-xl border px-4 py-2">
+                  <select id="day" class="w-full rounded-xl border border-slate-300 px-4 py-2">
                     <option>Lundi</option>
                     <option>Mardi</option>
                     <option>Mercredi</option>
@@ -232,33 +235,33 @@
                     <option>Dimanche</option>
                   </select>
 
-                  <input id="shift" placeholder="Horaire ex: 07:00-15:00" required class="w-full rounded-xl border px-4 py-2" />
-                  <input id="agentMatricules" placeholder="Matricules séparés par virgule" class="w-full rounded-xl border px-4 py-2" />
+                  <input id="shift" placeholder="Horaire ex: 07:00-15:00" required class="w-full rounded-xl border border-slate-300 px-4 py-2" />
+                  <input id="agentMatricules" placeholder="Matricules séparés par virgule" class="w-full rounded-xl border border-slate-300 px-4 py-2" />
 
-                  <button class="w-full rounded-xl bg-purple-600 text-white px-4 py-3 font-semibold hover:bg-purple-700">
+                  <button class="w-full rounded-xl bg-purple-600 text-white px-4 py-3 font-bold hover:bg-purple-700">
                     Enregistrer rotation
                   </button>
                 </form>
               </div>
 
-              <div class="lg:col-span-2 bg-white rounded-2xl shadow p-5">
-                <h3 class="text-xl font-bold mb-4">Rotations planifiées</h3>
+              <div class="lg:col-span-2 bg-white rounded-2xl shadow p-5 border border-slate-200">
+                <h3 class="text-xl font-black mb-4">Rotations planifiées</h3>
                 <div id="rotationsList" class="space-y-3"></div>
               </div>
             </div>
           </section>
 
           <!-- DOCUMENTS -->
-          <section id="documentsSection" class="section hidden">
+          <section id="documentsSection" class="appSection hidden">
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-              <div class="bg-white rounded-2xl shadow p-5">
-                <h3 class="text-xl font-bold mb-4">Ajouter un document</h3>
+              <div class="bg-white rounded-2xl shadow p-5 border border-slate-200">
+                <h3 class="text-xl font-black mb-4">Ajouter un document</h3>
 
                 <form id="documentForm" class="space-y-3">
-                  <input id="docAgentMatricule" placeholder="Matricule agent" required class="w-full rounded-xl border px-4 py-2" />
-                  <input id="docTitle" placeholder="Titre du document" required class="w-full rounded-xl border px-4 py-2" />
+                  <input id="docAgentMatricule" placeholder="Matricule agent" required class="w-full rounded-xl border border-slate-300 px-4 py-2" />
+                  <input id="docTitle" placeholder="Titre du document" required class="w-full rounded-xl border border-slate-300 px-4 py-2" />
 
-                  <select id="docType" class="w-full rounded-xl border px-4 py-2">
+                  <select id="docType" class="w-full rounded-xl border border-slate-300 px-4 py-2">
                     <option>Décision d’affectation</option>
                     <option>Note de service</option>
                     <option>Certificat médical</option>
@@ -269,91 +272,128 @@
                   </select>
 
                   <label class="block text-sm text-slate-500">Date d’expiration</label>
-                  <input id="docExpiryDate" type="date" class="w-full rounded-xl border px-4 py-2" />
+                  <input id="docExpiryDate" type="date" class="w-full rounded-xl border border-slate-300 px-4 py-2" />
 
-                  <button class="w-full rounded-xl bg-amber-500 text-white px-4 py-3 font-semibold hover:bg-amber-600">
+                  <button class="w-full rounded-xl bg-amber-500 text-white px-4 py-3 font-bold hover:bg-amber-600">
                     Ajouter document
                   </button>
                 </form>
               </div>
 
-              <div class="lg:col-span-2 bg-white rounded-2xl shadow p-5">
-                <h3 class="text-xl font-bold mb-4">Documents enregistrés</h3>
+              <div class="lg:col-span-2 bg-white rounded-2xl shadow p-5 border border-slate-200">
+                <h3 class="text-xl font-black mb-4">Documents enregistrés</h3>
                 <div id="documentsList" class="space-y-3"></div>
               </div>
             </div>
           </section>
 
           <!-- ALERTES -->
-          <section id="alertsSection" class="section hidden">
-            <div class="bg-white rounded-2xl shadow p-5">
-              <h3 class="text-xl font-bold mb-4">Alertes</h3>
+          <section id="alertsSection" class="appSection hidden">
+            <div class="bg-white rounded-2xl shadow p-5 border border-slate-200">
+              <h3 class="text-xl font-black mb-4">Alertes</h3>
               <div id="alertsList" class="space-y-3"></div>
             </div>
           </section>
 
-          <!-- HISTORIQUE -->
-          <section id="logsSection" class="section hidden">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-              <div class="bg-white rounded-2xl shadow p-5">
-                <h3 class="text-xl font-bold mb-4">Historique des modifications</h3>
-                <div id="auditLogList" class="space-y-3 max-h-[600px] overflow-auto"></div>
+          <!-- UTILISATEURS -->
+          <section id="usersSection" class="appSection hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <div class="bg-white rounded-2xl shadow p-5 border border-slate-200">
+                <h3 class="text-xl font-black mb-4">Créer un utilisateur</h3>
+
+                <form id="userForm" class="space-y-3">
+                  <input id="userFirstName" placeholder="Prénom" required class="w-full rounded-xl border border-slate-300 px-4 py-2" />
+                  <input id="userLastName" placeholder="Nom" required class="w-full rounded-xl border border-slate-300 px-4 py-2" />
+                  <input id="userEmail" type="email" placeholder="Adresse e-mail" required class="w-full rounded-xl border border-slate-300 px-4 py-2" />
+                  <input id="userPassword" type="password" placeholder="Mot de passe" required class="w-full rounded-xl border border-slate-300 px-4 py-2" />
+
+                  <select id="userRole" class="w-full rounded-xl border border-slate-300 px-4 py-2">
+                    <option value="ADMIN">Administrateur</option>
+                    <option value="COMMANDANT">Commandant</option>
+                    <option value="RESPONSABLE_UNITE">Responsable unité</option>
+                    <option value="CONSULTATION">Consultation simple</option>
+                  </select>
+
+                  <label class="flex items-center gap-2 text-sm">
+                    <input id="userEmailConfirmed" type="checkbox" checked />
+                    E-mail confirmé
+                  </label>
+
+                  <button class="w-full rounded-xl bg-blue-700 text-white px-4 py-3 font-bold hover:bg-blue-800">
+                    Créer utilisateur
+                  </button>
+                </form>
               </div>
 
-              <div class="bg-white rounded-2xl shadow p-5">
-                <h3 class="text-xl font-bold mb-4">Journal sécurité</h3>
-                <div id="securityLogList" class="space-y-3 max-h-[600px] overflow-auto"></div>
+              <div class="lg:col-span-2 bg-white rounded-2xl shadow p-5 border border-slate-200">
+                <h3 class="text-xl font-black mb-4">Utilisateurs</h3>
+                <div id="usersList" class="space-y-3"></div>
+              </div>
+            </div>
+          </section>
+
+          <!-- HISTORIQUE -->
+          <section id="logsSection" class="appSection hidden">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <div class="bg-white rounded-2xl shadow p-5 border border-slate-200">
+                <h3 class="text-xl font-black mb-4">Historique des modifications</h3>
+                <div id="auditLogList" class="space-y-3 max-h-[620px] overflow-auto"></div>
+              </div>
+
+              <div class="bg-white rounded-2xl shadow p-5 border border-slate-200">
+                <h3 class="text-xl font-black mb-4">Journal sécurité</h3>
+                <div id="securityLogList" class="space-y-3 max-h-[620px] overflow-auto"></div>
               </div>
             </div>
           </section>
         </main>
       </div>
     </div>
-  </div>
+  </section>
 
   <!-- MODALE AGENT -->
-  <div id="agentModal" class="hidden fixed inset-0 bg-black/40 flex items-center justify-center p-4 z-50">
-    <div class="bg-white rounded-2xl shadow-xl w-full max-w-3xl p-6">
+  <div id="agentModal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl p-6">
       <div class="flex justify-between items-center mb-4">
-        <h3 id="modalTitle" class="text-xl font-bold">Ajouter un agent</h3>
-        <button onclick="closeAgentModal()" class="text-slate-500 hover:text-slate-900 text-2xl">&times;</button>
+        <h3 id="agentModalTitle" class="text-xl font-black">Ajouter un agent</h3>
+        <button id="closeAgentModalBtn" class="text-slate-500 hover:text-slate-900 text-3xl leading-none">&times;</button>
       </div>
 
       <form id="agentForm" class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <input type="hidden" id="agentId" />
 
         <div>
-          <label class="block text-sm font-medium mb-1">Matricule policier *</label>
+          <label class="block text-sm font-semibold mb-1">Matricule policier *</label>
           <input id="matricule" required class="w-full rounded-xl border border-slate-300 px-4 py-2" />
         </div>
 
         <div>
-          <label class="block text-sm font-medium mb-1">Nom *</label>
+          <label class="block text-sm font-semibold mb-1">Nom *</label>
           <input id="lastName" required class="w-full rounded-xl border border-slate-300 px-4 py-2" />
         </div>
 
         <div>
-          <label class="block text-sm font-medium mb-1">Prénom *</label>
+          <label class="block text-sm font-semibold mb-1">Prénom *</label>
           <input id="firstName" required class="w-full rounded-xl border border-slate-300 px-4 py-2" />
         </div>
 
         <div>
-          <label class="block text-sm font-medium mb-1">Grade *</label>
+          <label class="block text-sm font-semibold mb-1">Grade *</label>
           <input id="grade" required class="w-full rounded-xl border border-slate-300 px-4 py-2" />
         </div>
 
         <div>
-          <label class="block text-sm font-medium mb-1">Fonction *</label>
+          <label class="block text-sm font-semibold mb-1">Fonction *</label>
           <input id="functionName" required class="w-full rounded-xl border border-slate-300 px-4 py-2" />
         </div>
 
         <div>
-          <label class="block text-sm font-medium mb-1">Unité / Compagnie *</label>
+          <label class="block text-sm font-semibold mb-1">Unité / Compagnie *</label>
           <input id="unit" required class="w-full rounded-xl border border-slate-300 px-4 py-2" />
         </div>
 
         <div>
-          <label class="block text-sm font-medium mb-1">Statut</label>
+          <label class="block text-sm font-semibold mb-1">Statut</label>
           <select id="status" class="w-full rounded-xl border border-slate-300 px-4 py-2">
             <option>Actif</option>
             <option>Inactif</option>
@@ -361,7 +401,7 @@
         </div>
 
         <div>
-          <label class="block text-sm font-medium mb-1">Position actuelle</label>
+          <label class="block text-sm font-semibold mb-1">Position actuelle</label>
           <select id="position" class="w-full rounded-xl border border-slate-300 px-4 py-2">
             <option>Present</option>
             <option>Absence justifiee</option>
@@ -371,172 +411,181 @@
         </div>
 
         <div>
-          <label class="block text-sm font-medium mb-1">Date d’intégration</label>
+          <label class="block text-sm font-semibold mb-1">Date d’intégration</label>
           <input id="integrationDate" type="date" class="w-full rounded-xl border border-slate-300 px-4 py-2" />
         </div>
 
         <div>
-          <label class="block text-sm font-medium mb-1">E-mail</label>
+          <label class="block text-sm font-semibold mb-1">E-mail</label>
           <input id="agentEmail" type="email" class="w-full rounded-xl border border-slate-300 px-4 py-2" />
         </div>
 
         <div class="md:col-span-2">
-          <label class="block text-sm font-medium mb-1">Notes</label>
+          <label class="block text-sm font-semibold mb-1">Notes</label>
           <textarea id="notes" rows="3" class="w-full rounded-xl border border-slate-300 px-4 py-2"></textarea>
         </div>
 
         <div class="md:col-span-2 flex justify-end gap-3 pt-4">
-          <button type="button" onclick="closeAgentModal()" class="rounded-xl border border-slate-300 px-4 py-2 hover:bg-slate-100">
+          <button type="button" id="cancelAgentBtn" class="rounded-xl border border-slate-300 px-4 py-2 font-bold hover:bg-slate-100">
             Annuler
           </button>
-          <button type="submit" class="rounded-xl bg-blue-700 text-white px-4 py-2 font-semibold hover:bg-blue-800">
+
+          <button type="submit" class="rounded-xl bg-blue-700 text-white px-4 py-2 font-bold hover:bg-blue-800">
             Enregistrer
           </button>
         </div>
       </form>
 
-      <p id="agentError" class="hidden mt-3 text-red-600 text-sm"></p>
+      <p id="agentError" class="hidden mt-3 rounded-xl bg-red-50 text-red-700 px-4 py-3 text-sm"></p>
     </div>
   </div>
 
   <!-- MODALE INFO -->
-  <div id="infoModal" class="hidden fixed inset-0 bg-black/40 flex items-center justify-center p-4 z-50">
-    <div class="bg-white rounded-2xl shadow-xl w-full max-w-4xl p-6">
+  <div id="infoModal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-4xl p-6">
       <div class="flex justify-between items-center mb-4">
-        <h3 id="infoTitle" class="text-xl font-bold">Informations</h3>
-        <button onclick="closeInfoModal()" class="text-slate-500 hover:text-slate-900 text-2xl">&times;</button>
+        <h3 id="infoTitle" class="text-xl font-black">Informations</h3>
+        <button id="closeInfoModalBtn" class="text-slate-500 hover:text-slate-900 text-3xl leading-none">&times;</button>
       </div>
+
       <div id="infoContent" class="max-h-[70vh] overflow-auto"></div>
     </div>
   </div>
 
   <script>
-    let allAgents = [];
-    let bootstrapData = {};
+    const state = {
+      agents: [],
+      data: {},
+      currentSection: "dashboard"
+    };
 
-    const loginPage = document.getElementById("loginPage");
-    const appPage = document.getElementById("appPage");
-    const loginForm = document.getElementById("loginForm");
-    const loginError = document.getElementById("loginError");
-    const search = document.getElementById("search");
+    const sectionTitles = {
+      dashboard: "Tableau de bord",
+      agents: "Effectif",
+      attendance: "Fiche d’appel",
+      rotations: "Rotations",
+      documents: "Documents",
+      alerts: "Alertes",
+      users: "Utilisateurs",
+      logs: "Historique"
+    };
 
-    document.getElementById("attendanceDate").valueAsDate = new Date();
+    function el(id) {
+      return document.getElementById(id);
+    }
 
-    loginForm.addEventListener("submit", async function (event) {
-      event.preventDefault();
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
 
-      loginError.classList.add("hidden");
-      loginError.textContent = "";
-
-      const email = document.getElementById("email").value.trim();
-      const password = document.getElementById("password").value;
-
-      try {
-        const response = await fetch("/api/auth/login", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ email, password })
-        });
-
-        const result = await response.json();
-
-        if (!response.ok) {
-          loginError.textContent = result.error || "Connexion impossible.";
-          loginError.classList.remove("hidden");
-          return;
+    async function api(path, options = {}) {
+      const response = await fetch(path, {
+        ...options,
+        headers: {
+          "Content-Type": "application/json",
+          ...(options.headers || {})
         }
+      });
 
-        await loadDashboard();
+      let payload = {};
+      try {
+        payload = await response.json();
       } catch (error) {
-        loginError.textContent = "Erreur réseau. Vérifie le serveur.";
-        loginError.classList.remove("hidden");
+        payload = {};
       }
-    });
-
-    async function loadDashboard() {
-      const response = await fetch("/api/bootstrap");
-      const result = await response.json();
 
       if (!response.ok) {
-        loginPage.classList.remove("hidden");
-        appPage.classList.add("hidden");
-        return;
+        throw new Error(payload.error || "Une erreur est survenue.");
       }
 
-      bootstrapData = result;
-      allAgents = result.agents || [];
+      return payload;
+    }
 
-      updateStats(result);
-      renderUnitStats(result.stats.byUnit || {});
-      renderAgents(allAgents);
+    function showLogin(message = "") {
+      el("appPage").classList.add("hidden");
+      el("loginPage").classList.remove("hidden");
+
+      if (message) {
+        el("loginError").textContent = message;
+        el("loginError").classList.remove("hidden");
+      }
+    }
+
+    function showApp() {
+      el("loginPage").classList.add("hidden");
+      el("appPage").classList.remove("hidden");
+    }
+
+    function showSection(sectionName) {
+      state.currentSection = sectionName;
+
+      document.querySelectorAll(".appSection").forEach(section => {
+        section.classList.add("hidden");
+      });
+
+      const target = el(sectionName + "Section");
+      if (target) {
+        target.classList.remove("hidden");
+      }
+
+      el("pageTitle").textContent = sectionTitles[sectionName] || "DSP Personnel";
+
+      document.querySelectorAll(".navBtn").forEach(button => {
+        button.classList.remove("bg-slate-800");
+
+        if (button.dataset.section === sectionName) {
+          button.classList.add("bg-slate-800");
+        }
+      });
+
+      if (el("mobileNav")) {
+        el("mobileNav").value = sectionName;
+      }
+    }
+
+    async function loadDashboard() {
+      try {
+        const result = await api("/api/bootstrap");
+        state.data = result;
+        state.agents = result.agents || [];
+
+        renderAll();
+        showApp();
+        showSection(state.currentSection || "dashboard");
+      } catch (error) {
+        showLogin();
+      }
+    }
+
+    function renderAll() {
+      renderStats();
+      renderUnitStats();
+      renderAgents(state.agents);
       renderAttendance();
       renderRotations();
       renderDocuments();
       renderAlerts();
+      renderUsers();
       renderLogs();
-
-      loginPage.classList.add("hidden");
-      appPage.classList.remove("hidden");
     }
 
-    function updateStats(result) {
-      document.getElementById("totalAgents").textContent = result.stats.total;
-      document.getElementById("activeAgents").textContent = result.stats.active;
-      document.getElementById("presentAgents").textContent = result.stats.present;
-      document.getElementById("unjustifiedAgents").textContent = result.stats.unjustified;
+    function renderStats() {
+      const stats = state.data.stats || {};
+
+      el("totalAgents").textContent = stats.total ?? 0;
+      el("activeAgents").textContent = stats.active ?? 0;
+      el("presentAgents").textContent = stats.present ?? 0;
+      el("unjustifiedAgents").textContent = stats.unjustified ?? 0;
     }
 
-function showSection(name) {
-  document.querySelectorAll(".section").forEach(s => s.classList.add("hidden"));
-
-  const section = document.getElementById(name + "Section");
-  if (section) {
-    section.classList.remove("hidden");
-  }
-
-  const titles = {
-    dashboard: "Tableau de bord",
-    agents: "Effectif",
-    attendance: "Fiche d’appel",
-    rotations: "Rotations",
-    documents: "Documents",
-    alerts: "Alertes",
-    logs: "Historique"
-  };
-
-  document.getElementById("pageTitle").textContent = titles[name] || "DSP Personnel";
-
-  document.querySelectorAll(".navBtn").forEach(btn => {
-    btn.classList.remove("bg-slate-800");
-  });
-
-  const activeButton = document.querySelector(`[onclick="showSection('${name}')"]`);
-  if (activeButton) {
-    activeButton.classList.add("bg-slate-800");
-  }
-}
-
-  document.getElementById("pageTitle").textContent = titles[name] || "DSP Personnel";
-
-  document.querySelectorAll(".navBtn").forEach(btn => {
-    btn.classList.remove("bg-slate-800");
-  });
-
-  const activeButton = document.querySelector(`[onclick="showSection('${name}')"]`);
-  if (activeButton) {
-    activeButton.classList.add("bg-slate-800");
-  }
-}
-      };
-
-      document.getElementById("pageTitle").textContent = titles[name] || "DSP Personnel";
-
-      document.querySelectorAll(".navBtn").forEach(btn => btn.classList.remove("bg-slate-800"));
-      event?.target?.classList?.add("bg-slate-800");
-    }
-
-    function renderUnitStats(byUnit) {
-      const box = document.getElementById("unitStats");
+    function renderUnitStats() {
+      const box = el("unitStats");
+      const byUnit = state.data.stats?.byUnit || {};
       const entries = Object.entries(byUnit);
 
       if (!entries.length) {
@@ -544,208 +593,70 @@ function showSection(name) {
         return;
       }
 
-      box.innerHTML = entries.map(([unit, count]) => `
-        <div>
-          <div class="flex justify-between text-sm mb-1">
-            <span>${unit}</span>
-            <span class="font-semibold">${count}</span>
+      const max = Math.max(...entries.map(([, count]) => count), 1);
+
+      box.innerHTML = entries.map(([unit, count]) => {
+        const width = Math.max(8, Math.round((count / max) * 100));
+
+        return `
+          <div>
+            <div class="flex justify-between text-sm mb-1">
+              <span>${escapeHtml(unit)}</span>
+              <span class="font-bold">${count}</span>
+            </div>
+            <div class="h-2 bg-slate-100 rounded-full overflow-hidden">
+              <div class="h-full bg-blue-700" style="width:${width}%"></div>
+            </div>
           </div>
-          <div class="h-2 bg-slate-100 rounded-full overflow-hidden">
-            <div class="h-full bg-blue-700" style="width:${Math.min(100, count * 15)}%"></div>
-          </div>
-        </div>
-      `).join("");
+        `;
+      }).join("");
     }
 
     function renderAgents(agents) {
-      const tbody = document.getElementById("agentsTable");
-      const activeAgents = agents.filter(agent => !agent.archived);
+      const tbody = el("agentsTable");
+      const visible = (agents || []).filter(agent => !agent.archived);
 
-      if (!activeAgents.length) {
-        tbody.innerHTML = `
-          <tr>
-            <td colspan="8" class="p-4 text-center text-slate-500">Aucun agent trouvé.</td>
-          </tr>
-        `;
+      if (!visible.length) {
+        tbody.innerHTML = `<tr><td colspan="8" class="p-4 text-center text-slate-500">Aucun agent trouvé.</td></tr>`;
         return;
       }
 
-      tbody.innerHTML = activeAgents.map(agent => `
+      tbody.innerHTML = visible.map(agent => `
         <tr class="border-b hover:bg-slate-50">
-          <td class="p-3 font-semibold">${agent.matricule || ""}</td>
-          <td class="p-3">${agent.lastName || ""}</td>
-          <td class="p-3">${agent.firstName || ""}</td>
-          <td class="p-3">${agent.grade || ""}</td>
-          <td class="p-3">${agent.unit || ""}</td>
-          <td class="p-3">${agent.status || ""}</td>
-          <td class="p-3">${agent.position || ""}</td>
+          <td class="p-3 font-bold">${escapeHtml(agent.matricule)}</td>
+          <td class="p-3">${escapeHtml(agent.lastName)}</td>
+          <td class="p-3">${escapeHtml(agent.firstName)}</td>
+          <td class="p-3">${escapeHtml(agent.grade)}</td>
+          <td class="p-3">${escapeHtml(agent.unit)}</td>
+          <td class="p-3">${escapeHtml(agent.status)}</td>
+          <td class="p-3">${escapeHtml(agent.position)}</td>
           <td class="p-3">
             <div class="flex flex-wrap gap-2">
-              <button onclick="viewAgent('${agent.id}')" class="text-sm rounded-lg border px-3 py-1 hover:bg-slate-100">Voir</button>
-              <button onclick="editAgent('${agent.id}')" class="text-sm rounded-lg bg-blue-700 text-white px-3 py-1 hover:bg-blue-800">Modifier</button>
-              <button onclick="archiveAgent('${agent.id}')" class="text-sm rounded-lg bg-red-600 text-white px-3 py-1 hover:bg-red-700">Archiver</button>
+              <button data-view-agent="${escapeHtml(agent.id)}" class="text-sm rounded-lg border px-3 py-1 font-semibold hover:bg-slate-100">Voir</button>
+              <button data-edit-agent="${escapeHtml(agent.id)}" class="text-sm rounded-lg bg-blue-700 text-white px-3 py-1 font-semibold hover:bg-blue-800">Modifier</button>
+              <button data-archive-agent="${escapeHtml(agent.id)}" class="text-sm rounded-lg bg-red-600 text-white px-3 py-1 font-semibold hover:bg-red-700">Archiver</button>
             </div>
           </td>
         </tr>
       `).join("");
     }
 
-    search.addEventListener("input", function () {
-      const q = search.value.toLowerCase();
-
-      const filtered = allAgents.filter(agent => {
-        return [
-          agent.matricule,
-          agent.lastName,
-          agent.firstName,
-          agent.grade,
-          agent.unit,
-          agent.status,
-          agent.position
-        ].join(" ").toLowerCase().includes(q);
-      });
-
-      renderAgents(filtered);
-    });
-
-    function openAddAgentModal() {
-      document.getElementById("modalTitle").textContent = "Ajouter un agent";
-      document.getElementById("agentForm").reset();
-      document.getElementById("agentId").value = "";
-      document.getElementById("matricule").disabled = false;
-      document.getElementById("agentError").classList.add("hidden");
-      document.getElementById("agentModal").classList.remove("hidden");
-    }
-
-    function closeAgentModal() {
-      document.getElementById("agentModal").classList.add("hidden");
-    }
-
-    function getAgentFormData() {
-      return {
-        matricule: document.getElementById("matricule").value.trim(),
-        lastName: document.getElementById("lastName").value.trim(),
-        firstName: document.getElementById("firstName").value.trim(),
-        grade: document.getElementById("grade").value.trim(),
-        function: document.getElementById("functionName").value.trim(),
-        unit: document.getElementById("unit").value.trim(),
-        status: document.getElementById("status").value,
-        position: document.getElementById("position").value,
-        integrationDate: document.getElementById("integrationDate").value,
-        email: document.getElementById("agentEmail").value.trim(),
-        notes: document.getElementById("notes").value.trim()
-      };
-    }
-
-    document.getElementById("agentForm").addEventListener("submit", async function (event) {
-      event.preventDefault();
-
-      const agentError = document.getElementById("agentError");
-      agentError.classList.add("hidden");
-
-      const id = document.getElementById("agentId").value;
-      const payload = getAgentFormData();
-
-      if (!payload.matricule) {
-        agentError.textContent = "Le matricule policier est obligatoire.";
-        agentError.classList.remove("hidden");
-        return;
-      }
-
-      const url = id ? `/api/agents/${id}` : "/api/agents";
-      const method = id ? "PUT" : "POST";
-
-      const response = await fetch(url, {
-        method,
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
-
-      const result = await response.json();
-
-      if (!response.ok) {
-        agentError.textContent = result.error || "Enregistrement impossible.";
-        agentError.classList.remove("hidden");
-        return;
-      }
-
-      closeAgentModal();
-      await loadDashboard();
-    });
-
-    function editAgent(id) {
-      const agent = allAgents.find(a => a.id === id);
-      if (!agent) return;
-
-      document.getElementById("modalTitle").textContent = "Modifier un agent";
-      document.getElementById("agentId").value = agent.id;
-      document.getElementById("matricule").value = agent.matricule || "";
-      document.getElementById("matricule").disabled = true;
-      document.getElementById("lastName").value = agent.lastName || "";
-      document.getElementById("firstName").value = agent.firstName || "";
-      document.getElementById("grade").value = agent.grade || "";
-      document.getElementById("functionName").value = agent.function || "";
-      document.getElementById("unit").value = agent.unit || "";
-      document.getElementById("status").value = agent.status || "Actif";
-      document.getElementById("position").value = agent.position || "Present";
-      document.getElementById("integrationDate").value = agent.integrationDate || "";
-      document.getElementById("agentEmail").value = agent.email || "";
-      document.getElementById("notes").value = agent.notes || "";
-
-      document.getElementById("agentError").classList.add("hidden");
-      document.getElementById("agentModal").classList.remove("hidden");
-    }
-
-    function viewAgent(id) {
-      const agent = allAgents.find(a => a.id === id);
-      if (!agent) return;
-
-      document.getElementById("infoTitle").textContent = `Fiche agent - ${agent.matricule}`;
-      document.getElementById("infoContent").innerHTML = `
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div class="bg-slate-50 rounded-xl p-4"><p class="text-slate-500">Matricule policier</p><p class="font-bold">${agent.matricule || ""}</p></div>
-          <div class="bg-slate-50 rounded-xl p-4"><p class="text-slate-500">Nom complet</p><p class="font-bold">${agent.firstName || ""} ${agent.lastName || ""}</p></div>
-          <div class="bg-slate-50 rounded-xl p-4"><p class="text-slate-500">Grade</p><p class="font-bold">${agent.grade || ""}</p></div>
-          <div class="bg-slate-50 rounded-xl p-4"><p class="text-slate-500">Fonction</p><p class="font-bold">${agent.function || ""}</p></div>
-          <div class="bg-slate-50 rounded-xl p-4"><p class="text-slate-500">Unité</p><p class="font-bold">${agent.unit || ""}</p></div>
-          <div class="bg-slate-50 rounded-xl p-4"><p class="text-slate-500">Position</p><p class="font-bold">${agent.position || ""}</p></div>
-        </div>
-        <div class="mt-4 bg-slate-50 rounded-xl p-4">
-          <p class="text-slate-500">Notes</p>
-          <p>${agent.notes || "Aucune note."}</p>
-        </div>
-      `;
-
-      document.getElementById("infoModal").classList.remove("hidden");
-    }
-
-    async function archiveAgent(id) {
-      const agent = allAgents.find(a => a.id === id);
-      if (!agent) return;
-
-      if (!confirm(`Archiver l’agent ${agent.matricule} ?`)) return;
-
-      const response = await fetch(`/api/agents/${id}`, { method: "DELETE" });
-
-      if (!response.ok) {
-        alert("Archivage impossible.");
-        return;
-      }
-
-      await loadDashboard();
-    }
-
     function renderAttendance() {
-      const tbody = document.getElementById("attendanceTable");
-      const agents = allAgents.filter(a => !a.archived);
+      const tbody = el("attendanceTable");
+      const agents = state.agents.filter(agent => !agent.archived);
+
+      if (!agents.length) {
+        tbody.innerHTML = `<tr><td colspan="5" class="p-4 text-center text-slate-500">Aucun agent actif.</td></tr>`;
+        return;
+      }
 
       tbody.innerHTML = agents.map(agent => `
         <tr class="border-b">
-          <td class="p-3 font-semibold">${agent.matricule}</td>
-          <td class="p-3">${agent.firstName} ${agent.lastName}</td>
-          <td class="p-3">${agent.unit}</td>
+          <td class="p-3 font-bold">${escapeHtml(agent.matricule)}</td>
+          <td class="p-3">${escapeHtml(agent.firstName)} ${escapeHtml(agent.lastName)}</td>
+          <td class="p-3">${escapeHtml(agent.unit)}</td>
           <td class="p-3">
-            <select data-matricule="${agent.matricule}" class="attendancePosition rounded-xl border px-3 py-2">
+            <select data-attendance-position="${escapeHtml(agent.matricule)}" class="rounded-xl border border-slate-300 px-3 py-2">
               <option ${agent.position === "Present" ? "selected" : ""}>Present</option>
               <option ${agent.position === "Absence justifiee" ? "selected" : ""}>Absence justifiee</option>
               <option ${agent.position === "Absence injustifiee" ? "selected" : ""}>Absence injustifiee</option>
@@ -753,205 +664,470 @@ function showSection(name) {
             </select>
           </td>
           <td class="p-3">
-            <input data-matricule="${agent.matricule}" class="attendanceReason rounded-xl border px-3 py-2 w-full" placeholder="Justification" />
+            <input data-attendance-reason="${escapeHtml(agent.matricule)}" class="rounded-xl border border-slate-300 px-3 py-2 w-full" placeholder="Justification" />
           </td>
         </tr>
       `).join("");
     }
 
-    async function saveAttendance() {
-      const entries = Array.from(document.querySelectorAll(".attendancePosition")).map(select => {
-        const matricule = select.dataset.matricule;
-        const reasonInput = document.querySelector(`.attendanceReason[data-matricule="${matricule}"]`);
-        return {
-          matricule,
-          position: select.value,
-          justification: reasonInput.value || ""
-        };
-      });
-
-      const payload = {
-        date: document.getElementById("attendanceDate").value,
-        status: "Validee",
-        entries
-      };
-
-      const response = await fetch("/api/attendance", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
-
-      if (!response.ok) {
-        alert("Impossible d’enregistrer la fiche d’appel.");
-        return;
-      }
-
-      alert("Fiche d’appel validée.");
-      await loadDashboard();
-    }
-
-    document.getElementById("rotationForm").addEventListener("submit", async function (event) {
-      event.preventDefault();
-
-      const payload = {
-        weekStart: document.getElementById("weekStart").value,
-        team: document.getElementById("team").value,
-        unit: document.getElementById("rotationUnit").value,
-        day: document.getElementById("day").value,
-        shift: document.getElementById("shift").value,
-        agentMatricules: document.getElementById("agentMatricules").value.split(",").map(x => x.trim()).filter(Boolean),
-        status: "Planifie"
-      };
-
-      const response = await fetch("/api/rotations", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
-
-      if (!response.ok) {
-        alert("Impossible d’enregistrer la rotation.");
-        return;
-      }
-
-      document.getElementById("rotationForm").reset();
-      await loadDashboard();
-    });
-
     function renderRotations() {
-      const box = document.getElementById("rotationsList");
-      const rotations = bootstrapData.rotations || [];
+      const box = el("rotationsList");
+      const rotations = state.data.rotations || [];
 
       if (!rotations.length) {
         box.innerHTML = `<p class="text-slate-500">Aucune rotation enregistrée.</p>`;
         return;
       }
 
-      box.innerHTML = rotations.map(r => `
-        <div class="border rounded-xl p-4">
-          <div class="flex justify-between">
-            <p class="font-bold">${r.team || ""} - ${r.unit || ""}</p>
-            <span class="text-sm bg-purple-100 text-purple-700 px-3 py-1 rounded-full">${r.status || ""}</span>
+      box.innerHTML = rotations.map(rotation => `
+        <div class="border border-slate-200 rounded-xl p-4">
+          <div class="flex justify-between gap-3">
+            <p class="font-black">${escapeHtml(rotation.team)} - ${escapeHtml(rotation.unit)}</p>
+            <span class="text-sm bg-purple-100 text-purple-700 px-3 py-1 rounded-full">${escapeHtml(rotation.status)}</span>
           </div>
-          <p class="text-slate-500 mt-1">${r.day || ""} | ${r.shift || ""} | Semaine du ${r.weekStart || ""}</p>
-          <p class="text-sm mt-2">Agents : ${(r.agentMatricules || []).join(", ") || "Non précisé"}</p>
+          <p class="text-slate-500 mt-1">${escapeHtml(rotation.day)} | ${escapeHtml(rotation.shift)} | Semaine du ${escapeHtml(rotation.weekStart)}</p>
+          <p class="text-sm mt-2">Agents : ${escapeHtml((rotation.agentMatricules || []).join(", ") || "Non précisé")}</p>
         </div>
       `).join("");
     }
 
-    document.getElementById("documentForm").addEventListener("submit", async function (event) {
-      event.preventDefault();
-
-      const payload = {
-        agentMatricule: document.getElementById("docAgentMatricule").value.trim(),
-        title: document.getElementById("docTitle").value.trim(),
-        type: document.getElementById("docType").value,
-        expiryDate: document.getElementById("docExpiryDate").value,
-        version: 1
-      };
-
-      const response = await fetch("/api/documents", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload)
-      });
-
-      if (!response.ok) {
-        alert("Impossible d’ajouter le document.");
-        return;
-      }
-
-      document.getElementById("documentForm").reset();
-      await loadDashboard();
-    });
-
     function renderDocuments() {
-      const box = document.getElementById("documentsList");
-      const docs = bootstrapData.documents || [];
+      const box = el("documentsList");
+      const documents = (state.data.documents || []).filter(document => !document.archived);
 
-      if (!docs.length) {
+      if (!documents.length) {
         box.innerHTML = `<p class="text-slate-500">Aucun document enregistré.</p>`;
         return;
       }
 
-      box.innerHTML = docs.filter(d => !d.archived).map(d => `
-        <div class="border rounded-xl p-4">
-          <div class="flex justify-between">
-            <p class="font-bold">${d.title || ""}</p>
-            <span class="text-sm bg-amber-100 text-amber-700 px-3 py-1 rounded-full">${d.type || ""}</span>
+      box.innerHTML = documents.map(document => `
+        <div class="border border-slate-200 rounded-xl p-4">
+          <div class="flex justify-between gap-3">
+            <p class="font-black">${escapeHtml(document.title)}</p>
+            <span class="text-sm bg-amber-100 text-amber-700 px-3 py-1 rounded-full">${escapeHtml(document.type)}</span>
           </div>
-          <p class="text-slate-500 mt-1">Agent : ${d.agentMatricule || ""}</p>
-          <p class="text-sm mt-1">Expiration : ${d.expiryDate || "Non renseignée"}</p>
-          <p class="text-sm text-slate-500">Version : ${d.version || 1}</p>
+          <p class="text-slate-500 mt-1">Agent : ${escapeHtml(document.agentMatricule)}</p>
+          <p class="text-sm mt-1">Expiration : ${escapeHtml(document.expiryDate || "Non renseignée")}</p>
+          <p class="text-sm text-slate-500">Version : ${escapeHtml(document.version || 1)}</p>
         </div>
       `).join("");
     }
 
     function renderAlerts() {
-      const box = document.getElementById("alertsList");
-      const alerts = bootstrapData.alerts || [];
+      const box = el("alertsList");
+      const alerts = state.data.alerts || [];
 
       if (!alerts.length) {
         box.innerHTML = `<p class="text-slate-500">Aucune alerte.</p>`;
         return;
       }
 
-      box.innerHTML = alerts.map(a => `
-        <div class="border rounded-xl p-4">
-          <div class="flex justify-between">
-            <p class="font-bold">${a.type || ""}</p>
-            <span class="text-sm bg-red-100 text-red-700 px-3 py-1 rounded-full">${a.urgency || ""}</span>
+      box.innerHTML = alerts.map(alert => `
+        <div class="border border-slate-200 rounded-xl p-4">
+          <div class="flex justify-between gap-3">
+            <p class="font-black">${escapeHtml(alert.type)}</p>
+            <span class="text-sm bg-red-100 text-red-700 px-3 py-1 rounded-full">${escapeHtml(alert.urgency)}</span>
           </div>
-          <p class="text-slate-500 mt-1">Agent : ${a.agentMatricule || "Non applicable"}</p>
-          <p class="text-slate-500">Unité : ${a.unit || "Non applicable"}</p>
-          <p class="text-sm mt-1">Statut : ${a.status || ""}</p>
+          <p class="text-slate-500 mt-1">Agent : ${escapeHtml(alert.agentMatricule || "Non applicable")}</p>
+          <p class="text-slate-500">Unité : ${escapeHtml(alert.unit || "Non applicable")}</p>
+          <p class="text-sm mt-1">Statut : ${escapeHtml(alert.status)}</p>
+        </div>
+      `).join("");
+    }
+
+    function renderUsers() {
+      const box = el("usersList");
+      const users = state.data.users || [];
+
+      if (!users.length) {
+        box.innerHTML = `<p class="text-slate-500">Aucun utilisateur.</p>`;
+        return;
+      }
+
+      box.innerHTML = users.map(user => `
+        <div class="border border-slate-200 rounded-xl p-4">
+          <p class="font-black">${escapeHtml(user.firstName)} ${escapeHtml(user.lastName)}</p>
+          <p class="text-slate-500">${escapeHtml(user.email)}</p>
+          <div class="flex flex-wrap gap-2 mt-2">
+            <span class="text-sm bg-blue-100 text-blue-700 px-3 py-1 rounded-full">${escapeHtml(user.role)}</span>
+            <span class="text-sm ${user.emailConfirmed ? "bg-emerald-100 text-emerald-700" : "bg-red-100 text-red-700"} px-3 py-1 rounded-full">
+              ${user.emailConfirmed ? "E-mail confirmé" : "E-mail non confirmé"}
+            </span>
+          </div>
         </div>
       `).join("");
     }
 
     function renderLogs() {
-      const auditBox = document.getElementById("auditLogList");
-      const securityBox = document.getElementById("securityLogList");
+      const auditBox = el("auditLogList");
+      const securityBox = el("securityLogList");
+      const audits = state.data.auditLog || [];
+      const security = state.data.securityLog || [];
 
-      const audits = bootstrapData.auditLog || [];
-      const security = bootstrapData.securityLog || [];
-
-      auditBox.innerHTML = audits.length ? audits.map(l => `
-        <div class="border rounded-xl p-3">
-          <p class="font-semibold">${l.action || ""}</p>
-          <p class="text-sm text-slate-500">${l.date || ""}</p>
-          <p class="text-sm">Auteur : ${l.author || ""}</p>
-          <p class="text-sm">Élément : ${l.entity || ""}</p>
+      auditBox.innerHTML = audits.length ? audits.map(log => `
+        <div class="border border-slate-200 rounded-xl p-3">
+          <p class="font-bold">${escapeHtml(log.action)}</p>
+          <p class="text-sm text-slate-500">${escapeHtml(log.date)}</p>
+          <p class="text-sm">Auteur : ${escapeHtml(log.author)}</p>
+          <p class="text-sm">Élément : ${escapeHtml(log.entity)}</p>
         </div>
       `).join("") : `<p class="text-slate-500">Aucun historique.</p>`;
 
-      securityBox.innerHTML = security.length ? security.map(l => `
-        <div class="border rounded-xl p-3">
-          <p class="font-semibold">${l.action || ""} - ${l.status || ""}</p>
-          <p class="text-sm text-slate-500">${l.date || ""}</p>
-          <p class="text-sm">Utilisateur : ${l.userEmail || ""}</p>
+      securityBox.innerHTML = security.length ? security.map(log => `
+        <div class="border border-slate-200 rounded-xl p-3">
+          <p class="font-bold">${escapeHtml(log.action)} - ${escapeHtml(log.status)}</p>
+          <p class="text-sm text-slate-500">${escapeHtml(log.date)}</p>
+          <p class="text-sm">Utilisateur : ${escapeHtml(log.userEmail)}</p>
         </div>
       `).join("") : `<p class="text-slate-500">Aucun journal sécurité.</p>`;
     }
 
-    function closeInfoModal() {
-      document.getElementById("infoModal").classList.add("hidden");
+    function renderAll() {
+      renderStats();
+      renderUnitStats();
+      renderAgents(state.agents);
+      renderAttendance();
+      renderRotations();
+      renderDocuments();
+      renderAlerts();
+      renderUsers();
+      renderLogs();
     }
 
-    function downloadExport() {
-      window.location.href = "/api/export";
+    function openAddAgentModal() {
+      el("agentModalTitle").textContent = "Ajouter un agent";
+      el("agentForm").reset();
+      el("agentId").value = "";
+      el("matricule").disabled = false;
+      el("agentError").classList.add("hidden");
+      el("agentModal").classList.remove("hidden");
+    }
+
+    function closeAgentModal() {
+      el("agentModal").classList.add("hidden");
+    }
+
+    function closeInfoModal() {
+      el("infoModal").classList.add("hidden");
+    }
+
+    function getAgentFormData() {
+      return {
+        matricule: el("matricule").value.trim(),
+        lastName: el("lastName").value.trim(),
+        firstName: el("firstName").value.trim(),
+        grade: el("grade").value.trim(),
+        function: el("functionName").value.trim(),
+        unit: el("unit").value.trim(),
+        status: el("status").value,
+        position: el("position").value,
+        integrationDate: el("integrationDate").value,
+        email: el("agentEmail").value.trim(),
+        notes: el("notes").value.trim()
+      };
+    }
+
+    function editAgent(id) {
+      const agent = state.agents.find(item => item.id === id);
+      if (!agent) return;
+
+      el("agentModalTitle").textContent = "Modifier un agent";
+      el("agentId").value = agent.id;
+      el("matricule").value = agent.matricule || "";
+      el("matricule").disabled = true;
+      el("lastName").value = agent.lastName || "";
+      el("firstName").value = agent.firstName || "";
+      el("grade").value = agent.grade || "";
+      el("functionName").value = agent.function || "";
+      el("unit").value = agent.unit || "";
+      el("status").value = agent.status || "Actif";
+      el("position").value = agent.position || "Present";
+      el("integrationDate").value = agent.integrationDate || "";
+      el("agentEmail").value = agent.email || "";
+      el("notes").value = agent.notes || "";
+      el("agentError").classList.add("hidden");
+      el("agentModal").classList.remove("hidden");
+    }
+
+    function viewAgent(id) {
+      const agent = state.agents.find(item => item.id === id);
+      if (!agent) return;
+
+      el("infoTitle").textContent = `Fiche agent - ${agent.matricule}`;
+      el("infoContent").innerHTML = `
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="bg-slate-50 rounded-xl p-4"><p class="text-slate-500">Matricule policier</p><p class="font-black">${escapeHtml(agent.matricule)}</p></div>
+          <div class="bg-slate-50 rounded-xl p-4"><p class="text-slate-500">Nom complet</p><p class="font-black">${escapeHtml(agent.firstName)} ${escapeHtml(agent.lastName)}</p></div>
+          <div class="bg-slate-50 rounded-xl p-4"><p class="text-slate-500">Grade</p><p class="font-black">${escapeHtml(agent.grade)}</p></div>
+          <div class="bg-slate-50 rounded-xl p-4"><p class="text-slate-500">Fonction</p><p class="font-black">${escapeHtml(agent.function)}</p></div>
+          <div class="bg-slate-50 rounded-xl p-4"><p class="text-slate-500">Unité</p><p class="font-black">${escapeHtml(agent.unit)}</p></div>
+          <div class="bg-slate-50 rounded-xl p-4"><p class="text-slate-500">Position</p><p class="font-black">${escapeHtml(agent.position)}</p></div>
+        </div>
+        <div class="mt-4 bg-slate-50 rounded-xl p-4">
+          <p class="text-slate-500">Notes</p>
+          <p>${escapeHtml(agent.notes || "Aucune note.")}</p>
+        </div>
+      `;
+
+      el("infoModal").classList.remove("hidden");
+    }
+
+    async function archiveAgent(id) {
+      const agent = state.agents.find(item => item.id === id);
+      if (!agent) return;
+
+      if (!confirm(`Archiver l’agent ${agent.matricule} ?`)) return;
+
+      try {
+        await api(`/api/agents/${id}`, { method: "DELETE" });
+        await loadDashboard();
+        showSection("agents");
+      } catch (error) {
+        alert(error.message);
+      }
+    }
+
+    async function saveAttendance() {
+      const entries = Array.from(document.querySelectorAll("[data-attendance-position]")).map(select => {
+        const matricule = select.dataset.attendancePosition;
+        const reasonInput = Array.from(document.querySelectorAll("[data-attendance-reason]"))
+          .find(input => input.dataset.attendanceReason === matricule);
+
+        return {
+          matricule,
+          position: select.value,
+          justification: reasonInput ? reasonInput.value : ""
+        };
+      });
+
+      try {
+        await api("/api/attendance", {
+          method: "POST",
+          body: JSON.stringify({
+            date: el("attendanceDate").value,
+            status: "Validee",
+            entries
+          })
+        });
+
+        alert("Fiche d’appel validée.");
+        await loadDashboard();
+        showSection("attendance");
+      } catch (error) {
+        alert(error.message);
+      }
     }
 
     async function logout() {
-      await fetch("/api/auth/logout", { method: "POST" });
-      appPage.classList.add("hidden");
-      loginPage.classList.remove("hidden");
+      try {
+        await api("/api/auth/logout", { method: "POST" });
+      } catch (error) {}
+
+      showLogin();
     }
 
-    document.getElementById("logoutBtn").addEventListener("click", logout);
+    function setupEvents() {
+      el("loginForm").addEventListener("submit", async event => {
+        event.preventDefault();
 
-    loadDashboard();
+        el("loginError").classList.add("hidden");
+        el("loginError").textContent = "";
+
+        try {
+          await api("/api/auth/login", {
+            method: "POST",
+            body: JSON.stringify({
+              email: el("email").value.trim(),
+              password: el("password").value
+            })
+          });
+
+          await loadDashboard();
+        } catch (error) {
+          el("loginError").textContent = error.message || "Connexion impossible.";
+          el("loginError").classList.remove("hidden");
+        }
+      });
+
+      document.querySelectorAll(".navBtn").forEach(button => {
+        button.addEventListener("click", () => {
+          showSection(button.dataset.section);
+        });
+      });
+
+      el("mobileNav").addEventListener("change", event => {
+        showSection(event.target.value);
+      });
+
+      document.querySelectorAll("[data-goto]").forEach(button => {
+        button.addEventListener("click", () => {
+          showSection(button.dataset.goto);
+        });
+      });
+
+      document.querySelectorAll("[data-open-agent]").forEach(button => {
+        button.addEventListener("click", openAddAgentModal);
+      });
+
+      el("logoutBtn").addEventListener("click", logout);
+      el("logoutBtnMobile").addEventListener("click", logout);
+
+      el("exportBtn").addEventListener("click", () => {
+        window.location.href = "/api/export";
+      });
+
+      el("closeAgentModalBtn").addEventListener("click", closeAgentModal);
+      el("cancelAgentBtn").addEventListener("click", closeAgentModal);
+      el("closeInfoModalBtn").addEventListener("click", closeInfoModal);
+      el("saveAttendanceBtn").addEventListener("click", saveAttendance);
+
+      el("searchAgents").addEventListener("input", () => {
+        const query = el("searchAgents").value.toLowerCase();
+
+        const filtered = state.agents.filter(agent => [
+          agent.matricule,
+          agent.lastName,
+          agent.firstName,
+          agent.grade,
+          agent.unit,
+          agent.status,
+          agent.position
+        ].join(" ").toLowerCase().includes(query));
+
+        renderAgents(filtered);
+      });
+
+      el("agentsTable").addEventListener("click", event => {
+        const viewId = event.target.dataset.viewAgent;
+        const editId = event.target.dataset.editAgent;
+        const archiveId = event.target.dataset.archiveAgent;
+
+        if (viewId) viewAgent(viewId);
+        if (editId) editAgent(editId);
+        if (archiveId) archiveAgent(archiveId);
+      });
+
+      el("agentForm").addEventListener("submit", async event => {
+        event.preventDefault();
+
+        const errorBox = el("agentError");
+        errorBox.classList.add("hidden");
+
+        const id = el("agentId").value;
+        const payload = getAgentFormData();
+
+        if (!payload.matricule) {
+          errorBox.textContent = "Le matricule policier est obligatoire.";
+          errorBox.classList.remove("hidden");
+          return;
+        }
+
+        try {
+          await api(id ? `/api/agents/${id}` : "/api/agents", {
+            method: id ? "PUT" : "POST",
+            body: JSON.stringify(payload)
+          });
+
+          closeAgentModal();
+          await loadDashboard();
+          showSection("agents");
+        } catch (error) {
+          errorBox.textContent = error.message;
+          errorBox.classList.remove("hidden");
+        }
+      });
+
+      el("rotationForm").addEventListener("submit", async event => {
+        event.preventDefault();
+
+        const payload = {
+          weekStart: el("weekStart").value,
+          team: el("team").value.trim(),
+          unit: el("rotationUnit").value.trim(),
+          day: el("day").value,
+          shift: el("shift").value.trim(),
+          agentMatricules: el("agentMatricules").value.split(",").map(value => value.trim()).filter(Boolean),
+          status: "Planifie"
+        };
+
+        try {
+          await api("/api/rotations", {
+            method: "POST",
+            body: JSON.stringify(payload)
+          });
+
+          el("rotationForm").reset();
+          await loadDashboard();
+          showSection("rotations");
+        } catch (error) {
+          alert(error.message);
+        }
+      });
+
+      el("documentForm").addEventListener("submit", async event => {
+        event.preventDefault();
+
+        const payload = {
+          agentMatricule: el("docAgentMatricule").value.trim(),
+          title: el("docTitle").value.trim(),
+          type: el("docType").value,
+          expiryDate: el("docExpiryDate").value,
+          version: 1
+        };
+
+        try {
+          await api("/api/documents", {
+            method: "POST",
+            body: JSON.stringify(payload)
+          });
+
+          el("documentForm").reset();
+          await loadDashboard();
+          showSection("documents");
+        } catch (error) {
+          alert(error.message);
+        }
+      });
+
+      el("userForm").addEventListener("submit", async event => {
+        event.preventDefault();
+
+        const payload = {
+          firstName: el("userFirstName").value.trim(),
+          lastName: el("userLastName").value.trim(),
+          email: el("userEmail").value.trim(),
+          password: el("userPassword").value,
+          role: el("userRole").value,
+          emailConfirmed: el("userEmailConfirmed").checked
+        };
+
+        try {
+          await api("/api/users", {
+            method: "POST",
+            body: JSON.stringify(payload)
+          });
+
+          el("userForm").reset();
+          el("userEmailConfirmed").checked = true;
+          await loadDashboard();
+          showSection("users");
+        } catch (error) {
+          alert(error.message);
+        }
+      });
+    }
+
+    function init() {
+      setupEvents();
+
+      if (el("attendanceDate")) {
+        el("attendanceDate").valueAsDate = new Date();
+      }
+
+      loadDashboard();
+    }
+
+    document.addEventListener("DOMContentLoaded", init);
   </script>
 </body>
 </html>
