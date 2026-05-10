@@ -5,36 +5,104 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>DSP Police - Management du Personnel</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/styles.css">
 </head>
 
 <body class="min-h-screen bg-slate-100 text-slate-900">
   <!-- PAGE CONNEXION -->
-  <section id="loginPage" class="min-h-screen flex items-center justify-center p-6">
-    <div class="w-full max-w-md bg-white rounded-2xl shadow-xl p-8 border border-slate-200">
-      <p class="text-sm font-bold text-blue-700">DSP POLICE</p>
-      <h1 class="text-3xl font-black mt-2">Management du Personnel</h1>
-      <p class="text-slate-500 mt-2 mb-6">Connexion sécurisée aux données opérationnelles.</p>
+  <section id="loginPage" class="min-h-screen relative overflow-hidden">
+    <div class="login-background"></div>
+    <div class="login-overlay"></div>
 
-      <form id="loginForm" class="space-y-4">
-        <div>
-          <label class="block text-sm font-semibold mb-1">Adresse e-mail</label>
-          <input id="email" type="email" value="admin@dsp.local" required
-            class="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none focus:ring-2 focus:ring-blue-600" />
+    <div class="relative z-10 min-h-screen flex items-center justify-end px-6 lg:px-20 py-24">
+      <div class="login-card w-full max-w-lg">
+        <div class="mb-8">
+          <div class="flex items-center gap-4 mb-6">
+            <div class="login-logo-card">
+              <img src="/police-logo.png" alt="Logo Police Nationale" class="login-logo-inner" />
+            </div>
+
+            <div>
+              <div class="inline-flex items-center gap-2 rounded-full bg-blue-50/90 text-blue-800 px-4 py-2 text-xs font-black uppercase tracking-wider">
+                Accès sécurisé DSP
+              </div>
+
+              <p class="text-xs text-slate-500 font-semibold mt-2">
+                Forces de Police Nationale
+              </p>
+            </div>
+          </div>
+
+          <h1 class="text-4xl lg:text-5xl font-black text-slate-950 leading-tight">
+            Management du Personnel
+          </h1>
+
+          <p class="text-slate-600 mt-4 leading-relaxed text-base">
+            Solution sécurisée de gestion du personnel DSP : suivi des effectifs,
+            présences, absences, rotations, documents et alertes en temps réel.
+          </p>
+
+          <p class="text-slate-500 mt-3 leading-relaxed text-sm">
+            Un outil professionnel pour piloter les équipes, tracer les mouvements
+            et centraliser les données opérationnelles.
+          </p>
         </div>
 
-        <div>
-          <label class="block text-sm font-semibold mb-1">Mot de passe</label>
-          <input id="password" type="password" required
-            class="w-full rounded-xl border border-slate-300 px-4 py-3 outline-none focus:ring-2 focus:ring-blue-600" />
+        <form id="loginForm" class="space-y-5">
+          <div>
+            <label class="block text-sm font-bold mb-2 text-slate-700">
+              Adresse e-mail
+            </label>
+
+            <input
+              id="email"
+              type="email"
+              value="admin@dsp.local"
+              required
+              class="login-input w-full rounded-2xl border border-slate-300 px-4 py-4 outline-none"
+            />
+          </div>
+
+          <div>
+            <label class="block text-sm font-bold mb-2 text-slate-700">
+              Mot de passe
+            </label>
+
+            <input
+              id="password"
+              type="password"
+              required
+              class="login-input w-full rounded-2xl border border-slate-300 px-4 py-4 outline-none"
+            />
+          </div>
+
+          <p
+            id="loginError"
+            class="hidden rounded-2xl bg-red-50 text-red-700 px-4 py-3 text-sm font-semibold"
+          ></p>
+
+          <button
+            type="submit"
+            class="login-button w-full rounded-2xl text-white py-4 font-black text-base"
+          >
+            Se connecter
+          </button>
+        </form>
+
+        <div class="mt-8 pt-6 border-t border-slate-200">
+          <p class="text-xs text-slate-500 leading-relaxed">
+            Connexion réservée aux utilisateurs autorisés. Toutes les actions
+            sensibles sont journalisées pour garantir la traçabilité et la sécurité
+            des données.
+          </p>
         </div>
+      </div>
+    </div>
 
-        <p id="loginError" class="hidden rounded-xl bg-red-50 text-red-700 px-4 py-3 text-sm"></p>
-
-        <button type="submit"
-          class="w-full rounded-xl bg-blue-700 text-white py-3 font-bold hover:bg-blue-800 transition">
-          Se connecter
-        </button>
-      </form>
+    <div class="absolute bottom-6 left-6 z-20 hidden lg:block">
+      <p class="text-white/80 text-xs font-semibold">
+        DSP Police — Système numérique de gestion opérationnelle
+      </p>
     </div>
   </section>
 
