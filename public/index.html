@@ -486,18 +486,35 @@
       document.getElementById("unjustifiedAgents").textContent = result.stats.unjustified;
     }
 
-    function showSection(name) {
-      document.querySelectorAll(".section").forEach(s => s.classList.add("hidden"));
-      document.getElementById(name + "Section").classList.remove("hidden");
+function showSection(name) {
+  document.querySelectorAll(".section").forEach(s => s.classList.add("hidden"));
 
-      const titles = {
-        dashboard: "Tableau de bord",
-        agents: "Effectif",
-        attendance: "Fiche d’appel",
-        rotations: "Rotations",
-        documents: "Documents",
-        alerts: "Alertes",
-        logs: "Historique"
+  const section = document.getElementById(name + "Section");
+  if (section) {
+    section.classList.remove("hidden");
+  }
+
+  const titles = {
+    dashboard: "Tableau de bord",
+    agents: "Effectif",
+    attendance: "Fiche d’appel",
+    rotations: "Rotations",
+    documents: "Documents",
+    alerts: "Alertes",
+    logs: "Historique"
+  };
+
+  document.getElementById("pageTitle").textContent = titles[name] || "DSP Personnel";
+
+  document.querySelectorAll(".navBtn").forEach(btn => {
+    btn.classList.remove("bg-slate-800");
+  });
+
+  const activeButton = document.querySelector(`[onclick="showSection('${name}')"]`);
+  if (activeButton) {
+    activeButton.classList.add("bg-slate-800");
+  }
+}
       };
 
       document.getElementById("pageTitle").textContent = titles[name] || "DSP Personnel";
