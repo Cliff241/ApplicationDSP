@@ -515,6 +515,18 @@ function showSection(name) {
     activeButton.classList.add("bg-slate-800");
   }
 }
+
+  document.getElementById("pageTitle").textContent = titles[name] || "DSP Personnel";
+
+  document.querySelectorAll(".navBtn").forEach(btn => {
+    btn.classList.remove("bg-slate-800");
+  });
+
+  const activeButton = document.querySelector(`[onclick="showSection('${name}')"]`);
+  if (activeButton) {
+    activeButton.classList.add("bg-slate-800");
+  }
+}
       };
 
       document.getElementById("pageTitle").textContent = titles[name] || "DSP Personnel";
