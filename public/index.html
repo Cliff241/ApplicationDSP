@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>DSP Personnel</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <div id="loginScreen" class="login-shell">
+      <main class="login-panel">
+        <div class="brand-mark">DSP</div>
+        <h1>Management du Personnel</h1>
+        <p class="muted">Connexion securisee aux donnees operationnelles.</p>
+        <form id="loginForm" class="stack">
+          <label>Adresse e-mail
+            <input name="email" type="email" autocomplete="username" value="admin@dsp.local" required>
+          </label>
+          <label>Mot de passe
+            <input name="password" type="password" autocomplete="current-password" value="Admin@123" required>
+          </label>
+          <button class="primary full" type="submit">Se connecter</button>
+          <p id="loginError" class="error"></p>
+        </form>
+      </main>
+    </div>
+
+    <div id="appShell" class="app-shell hidden">
+      <aside class="sidebar">
+        <div class="side-brand">
+          <strong>DSP</strong>
+          <span>Personnel</span>
+        </div>
+        <nav id="mainNav"></nav>
+      </aside>
+
+      <section class="workspace">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow" id="todayLabel"></p>
+            <h2 id="viewTitle">Tableau de bord</h2>
+          </div>
+          <div class="top-actions">
+            <input id="globalSearch" type="search" placeholder="Recherche matricule, nom, unite...">
+            <button id="logoutBtn" class="ghost">Deconnexion</button>
+          </div>
+        </header>
+
+        <div id="toast" class="toast hidden"></div>
+        <main id="view"></main>
+      </section>
+    </div>
+
+    <template id="modalTemplate">
+      <div class="modal-backdrop">
+        <section class="modal">
+          <header>
+            <h3></h3>
+            <button class="icon-btn" data-close title="Fermer">X</button>
+          </header>
+          <div class="modal-body"></div>
+        </section>
+      </div>
+    </template>
+
+    <script src="/app.js"></script>
+  </body>
+</html>
