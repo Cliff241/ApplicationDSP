@@ -1,0 +1,13 @@
+{
+  "name": "dsp-personnel-management",
+  "version": "1.0.0",
+  "private": true,
+  "type": "commonjs",
+  "description": "Application de management du personnel DSP",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
