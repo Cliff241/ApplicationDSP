@@ -311,10 +311,10 @@ button.bg-red-600 {
   background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(22px);
   border: 1px solid rgba(255, 255, 255, 0.65);
-  border-radius: 2rem;
-  padding: 2rem;
+  border-radius: 1.6rem;
+  padding: clamp(1.2rem, 1.7vw, 1.6rem);
   box-shadow:
-    0 40px 100px rgba(2, 6, 23, 0.35),
+    0 28px 70px rgba(2, 6, 23, 0.32),
     inset 0 1px 0 rgba(255, 255, 255, 0.85);
   animation: loginCardIn 550ms ease both;
 }
