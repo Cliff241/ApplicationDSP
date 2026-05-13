@@ -3,19 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="DSP Police - Management sécurisé du personnel" />
   <title>DSP Police - Management du Personnel</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="/styles.css">
 </head>
 
-<body class="min-h-screen bg-slate-100 text-slate-900">
+<body class="min-h-screen bg-slate-100 text-slate-900 antialiased">
   <!-- PAGE CONNEXION -->
   <section id="loginPage" class="min-h-screen relative overflow-hidden">
-    <div class="login-background"></div>
-    <div class="login-overlay"></div>
+    <div class="login-background" aria-hidden="true"></div>
+    <div class="login-overlay" aria-hidden="true"></div>
 
-   <div class="relative z-10 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-6">
-  <div class="login-card w-full max-w-[90vw] sm:max-w-sm md:max-w-md">
+    <div class="relative z-10 min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 py-6">
+      <div class="login-card w-full max-w-[90vw] sm:max-w-sm md:max-w-md">
         <div class="mb-8">
           <div class="flex items-center gap-4 mb-6">
             <div class="login-logo-card">
@@ -48,42 +49,48 @@
           </p>
         </div>
 
-        <form id="loginForm" class="space-y-5">
+        <form id="loginForm" class="space-y-5" novalidate>
           <div>
-            <label class="block text-sm font-bold mb-2 text-slate-700">
+            <label for="email" class="block text-sm font-bold mb-2 text-slate-700">
               Adresse e-mail
             </label>
 
             <input
               id="email"
+              name="email"
               type="email"
               value="admin@dsp.local"
+              autocomplete="username"
               required
-              class="login-input w-full rounded-2xl border border-slate-300 px-4 py-4 outline-none"
+              class="login-input w-full rounded-2xl border border-slate-300 px-4 py-4 outline-none focus:ring-4 focus:ring-blue-100 focus:border-blue-600"
             />
           </div>
 
           <div>
-            <label class="block text-sm font-bold mb-2 text-slate-700">
+            <label for="password" class="block text-sm font-bold mb-2 text-slate-700">
               Mot de passe
             </label>
 
             <input
               id="password"
+              name="password"
               type="password"
+              autocomplete="current-password"
               required
-              class="login-input w-full rounded-2xl border border-slate-300 px-4 py-4 outline-none"
+              class="login-input w-full rounded-2xl border border-slate-300 px-4 py-4 outline-none focus:ring-4 focus:ring-blue-100 focus:border-blue-600"
             />
           </div>
 
           <p
             id="loginError"
             class="hidden rounded-2xl bg-red-50 text-red-700 px-4 py-3 text-sm font-semibold"
+            role="alert"
           ></p>
 
           <button
+            id="loginSubmitBtn"
             type="submit"
-            class="login-button w-full rounded-2xl text-white py-4 font-black text-base"
+            class="login-button w-full rounded-2xl text-white py-4 font-black text-base disabled:opacity-60 disabled:cursor-not-allowed"
           >
             Se connecter
           </button>
@@ -116,19 +123,19 @@
           <h2 class="text-2xl font-black">Personnel</h2>
         </div>
 
-        <nav class="flex-1 p-4 space-y-2">
-          <button data-section="dashboard" class="navBtn w-full text-left px-4 py-3 rounded-xl bg-slate-800 hover:bg-slate-800">Tableau de bord</button>
-          <button data-section="agents" class="navBtn w-full text-left px-4 py-3 rounded-xl hover:bg-slate-800">Effectif</button>
-          <button data-section="attendance" class="navBtn w-full text-left px-4 py-3 rounded-xl hover:bg-slate-800">Fiche d’appel</button>
-          <button data-section="rotations" class="navBtn w-full text-left px-4 py-3 rounded-xl hover:bg-slate-800">Rotations</button>
-          <button data-section="documents" class="navBtn w-full text-left px-4 py-3 rounded-xl hover:bg-slate-800">Documents</button>
-          <button data-section="alerts" class="navBtn w-full text-left px-4 py-3 rounded-xl hover:bg-slate-800">Alertes</button>
-          <button data-section="users" class="navBtn w-full text-left px-4 py-3 rounded-xl hover:bg-slate-800">Utilisateurs</button>
-          <button data-section="logs" class="navBtn w-full text-left px-4 py-3 rounded-xl hover:bg-slate-800">Historique</button>
+        <nav class="flex-1 p-4 space-y-2" aria-label="Navigation principale">
+          <button data-section="dashboard" class="navBtn w-full text-left px-4 py-3 rounded-xl bg-slate-800 hover:bg-slate-800 focus:ring-2 focus:ring-blue-300">Tableau de bord</button>
+          <button data-section="agents" class="navBtn w-full text-left px-4 py-3 rounded-xl hover:bg-slate-800 focus:ring-2 focus:ring-blue-300">Effectif</button>
+          <button data-section="attendance" class="navBtn w-full text-left px-4 py-3 rounded-xl hover:bg-slate-800 focus:ring-2 focus:ring-blue-300">Fiche d’appel</button>
+          <button data-section="rotations" class="navBtn w-full text-left px-4 py-3 rounded-xl hover:bg-slate-800 focus:ring-2 focus:ring-blue-300">Rotations</button>
+          <button data-section="documents" class="navBtn w-full text-left px-4 py-3 rounded-xl hover:bg-slate-800 focus:ring-2 focus:ring-blue-300">Documents</button>
+          <button data-section="alerts" class="navBtn w-full text-left px-4 py-3 rounded-xl hover:bg-slate-800 focus:ring-2 focus:ring-blue-300">Alertes</button>
+          <button data-section="users" class="navBtn w-full text-left px-4 py-3 rounded-xl hover:bg-slate-800 focus:ring-2 focus:ring-blue-300">Utilisateurs</button>
+          <button data-section="logs" class="navBtn w-full text-left px-4 py-3 rounded-xl hover:bg-slate-800 focus:ring-2 focus:ring-blue-300">Historique</button>
         </nav>
 
         <div class="p-4 border-t border-slate-800">
-          <button id="logoutBtn" class="w-full rounded-xl bg-white text-slate-950 px-4 py-3 font-bold hover:bg-slate-200">
+          <button id="logoutBtn" class="w-full rounded-xl bg-white text-slate-950 px-4 py-3 font-bold hover:bg-slate-200 disabled:opacity-60 disabled:cursor-not-allowed">
             Déconnexion
           </button>
         </div>
@@ -136,14 +143,15 @@
 
       <!-- CONTENU PRINCIPAL -->
       <div class="flex-1 min-w-0">
-        <header class="bg-white border-b border-slate-200 px-6 py-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <header class="sticky top-0 z-30 bg-white/95 backdrop-blur border-b border-slate-200 px-6 py-4 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
             <p class="text-sm font-bold text-blue-700">DSP Personnel</p>
             <h1 id="pageTitle" class="text-2xl font-black">Tableau de bord</h1>
           </div>
 
           <div class="flex flex-wrap gap-2">
-            <select id="mobileNav" class="lg:hidden rounded-xl border border-slate-300 px-4 py-2">
+            <label for="mobileNav" class="sr-only">Navigation mobile</label>
+            <select id="mobileNav" class="lg:hidden rounded-xl border border-slate-300 px-4 py-2 focus:ring-4 focus:ring-blue-100 focus:border-blue-600">
               <option value="dashboard">Tableau de bord</option>
               <option value="agents">Effectif</option>
               <option value="attendance">Fiche d’appel</option>
@@ -154,17 +162,30 @@
               <option value="logs">Historique</option>
             </select>
 
-            <button id="exportBtn" class="rounded-xl bg-slate-900 text-white px-4 py-2 font-bold hover:bg-slate-800">
+            <button id="refreshBtn" class="rounded-xl border border-slate-300 px-4 py-2 font-bold hover:bg-slate-100 disabled:opacity-60 disabled:cursor-not-allowed">
+              Actualiser
+            </button>
+
+            <button id="exportBtn" class="rounded-xl bg-slate-900 text-white px-4 py-2 font-bold hover:bg-slate-800 disabled:opacity-60 disabled:cursor-not-allowed">
               Export CSV
             </button>
 
-            <button id="logoutBtnMobile" class="lg:hidden rounded-xl border border-slate-300 px-4 py-2 font-bold hover:bg-slate-100">
+            <button id="logoutBtnMobile" class="lg:hidden rounded-xl border border-slate-300 px-4 py-2 font-bold hover:bg-slate-100 disabled:opacity-60 disabled:cursor-not-allowed">
               Déconnexion
             </button>
           </div>
         </header>
 
         <main class="p-6 space-y-6">
+          <div id="appNotice" class="hidden rounded-2xl px-4 py-3 text-sm font-semibold" role="status" aria-live="polite"></div>
+
+          <div id="loadingState" class="hidden bg-white rounded-2xl shadow p-5 border border-slate-200">
+            <div class="flex items-center gap-3 text-slate-600 font-semibold">
+              <span class="h-4 w-4 rounded-full border-2 border-slate-300 border-t-blue-700 animate-spin" aria-hidden="true"></span>
+              Chargement des données opérationnelles...
+            </div>
+          </div>
+
           <!-- TABLEAU DE BORD -->
           <section id="dashboardSection" class="appSection">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -222,8 +243,9 @@
                 <h3 class="text-xl font-black">Effectif</h3>
 
                 <div class="flex flex-col md:flex-row gap-3">
+                  <label for="searchAgents" class="sr-only">Rechercher un agent</label>
                   <input id="searchAgents" type="search" placeholder="Recherche matricule, nom, grade, unité..."
-                    class="rounded-xl border border-slate-300 px-4 py-2 w-full md:w-96" />
+                    class="rounded-xl border border-slate-300 px-4 py-2 w-full md:w-96 focus:ring-4 focus:ring-blue-100 focus:border-blue-600" />
 
                   <button data-open-agent class="rounded-xl bg-blue-700 text-white px-4 py-2 font-bold hover:bg-blue-800">
                     + Ajouter
@@ -256,7 +278,8 @@
             <div class="bg-white rounded-2xl shadow p-5 border border-slate-200">
               <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
                 <h3 class="text-xl font-black">Fiche d’appel numérique</h3>
-                <input id="attendanceDate" type="date" class="rounded-xl border border-slate-300 px-4 py-2" />
+                <label for="attendanceDate" class="sr-only">Date de la fiche d’appel</label>
+                <input id="attendanceDate" type="date" class="rounded-xl border border-slate-300 px-4 py-2 focus:ring-4 focus:ring-blue-100 focus:border-blue-600" />
               </div>
 
               <div class="overflow-x-auto">
@@ -275,7 +298,7 @@
               </div>
 
               <div class="mt-5 flex justify-end">
-                <button id="saveAttendanceBtn" class="rounded-xl bg-emerald-600 text-white px-5 py-3 font-bold hover:bg-emerald-700">
+                <button id="saveAttendanceBtn" class="rounded-xl bg-emerald-600 text-white px-5 py-3 font-bold hover:bg-emerald-700 disabled:opacity-60 disabled:cursor-not-allowed">
                   Valider la fiche d’appel
                 </button>
               </div>
@@ -289,11 +312,15 @@
                 <h3 class="text-xl font-black mb-4">Planifier une rotation</h3>
 
                 <form id="rotationForm" class="space-y-3">
-                  <input id="weekStart" type="date" required class="w-full rounded-xl border border-slate-300 px-4 py-2" />
-                  <input id="team" placeholder="Équipe ex: Alpha" required class="w-full rounded-xl border border-slate-300 px-4 py-2" />
-                  <input id="rotationUnit" placeholder="Unité" required class="w-full rounded-xl border border-slate-300 px-4 py-2" />
+                  <label for="weekStart" class="sr-only">Début de semaine</label>
+                  <input id="weekStart" type="date" required class="w-full rounded-xl border border-slate-300 px-4 py-2 focus:ring-4 focus:ring-blue-100 focus:border-blue-600" />
+                  <label for="team" class="sr-only">Équipe</label>
+                  <input id="team" placeholder="Équipe ex: Alpha" required class="w-full rounded-xl border border-slate-300 px-4 py-2 focus:ring-4 focus:ring-blue-100 focus:border-blue-600" />
+                  <label for="rotationUnit" class="sr-only">Unité</label>
+                  <input id="rotationUnit" placeholder="Unité" required class="w-full rounded-xl border border-slate-300 px-4 py-2 focus:ring-4 focus:ring-blue-100 focus:border-blue-600" />
 
-                  <select id="day" class="w-full rounded-xl border border-slate-300 px-4 py-2">
+                  <label for="day" class="sr-only">Jour</label>
+                  <select id="day" class="w-full rounded-xl border border-slate-300 px-4 py-2 focus:ring-4 focus:ring-blue-100 focus:border-blue-600">
                     <option>Lundi</option>
                     <option>Mardi</option>
                     <option>Mercredi</option>
@@ -303,10 +330,12 @@
                     <option>Dimanche</option>
                   </select>
 
-                  <input id="shift" placeholder="Horaire ex: 07:00-15:00" required class="w-full rounded-xl border border-slate-300 px-4 py-2" />
-                  <input id="agentMatricules" placeholder="Matricules séparés par virgule" class="w-full rounded-xl border border-slate-300 px-4 py-2" />
+                  <label for="shift" class="sr-only">Horaire</label>
+                  <input id="shift" placeholder="Horaire ex: 07:00-15:00" required class="w-full rounded-xl border border-slate-300 px-4 py-2 focus:ring-4 focus:ring-blue-100 focus:border-blue-600" />
+                  <label for="agentMatricules" class="sr-only">Matricules des agents</label>
+                  <input id="agentMatricules" placeholder="Matricules séparés par virgule" class="w-full rounded-xl border border-slate-300 px-4 py-2 focus:ring-4 focus:ring-blue-100 focus:border-blue-600" />
 
-                  <button class="w-full rounded-xl bg-purple-600 text-white px-4 py-3 font-bold hover:bg-purple-700">
+                  <button class="w-full rounded-xl bg-purple-600 text-white px-4 py-3 font-bold hover:bg-purple-700 disabled:opacity-60 disabled:cursor-not-allowed">
                     Enregistrer rotation
                   </button>
                 </form>
@@ -326,10 +355,13 @@
                 <h3 class="text-xl font-black mb-4">Ajouter un document</h3>
 
                 <form id="documentForm" class="space-y-3">
-                  <input id="docAgentMatricule" placeholder="Matricule agent" required class="w-full rounded-xl border border-slate-300 px-4 py-2" />
-                  <input id="docTitle" placeholder="Titre du document" required class="w-full rounded-xl border border-slate-300 px-4 py-2" />
+                  <label for="docAgentMatricule" class="sr-only">Matricule agent</label>
+                  <input id="docAgentMatricule" placeholder="Matricule agent" required class="w-full rounded-xl border border-slate-300 px-4 py-2 focus:ring-4 focus:ring-blue-100 focus:border-blue-600" />
+                  <label for="docTitle" class="sr-only">Titre du document</label>
+                  <input id="docTitle" placeholder="Titre du document" required class="w-full rounded-xl border border-slate-300 px-4 py-2 focus:ring-4 focus:ring-blue-100 focus:border-blue-600" />
 
-                  <select id="docType" class="w-full rounded-xl border border-slate-300 px-4 py-2">
+                  <label for="docType" class="sr-only">Type de document</label>
+                  <select id="docType" class="w-full rounded-xl border border-slate-300 px-4 py-2 focus:ring-4 focus:ring-blue-100 focus:border-blue-600">
                     <option>Décision d’affectation</option>
                     <option>Note de service</option>
                     <option>Certificat médical</option>
@@ -339,10 +371,10 @@
                     <option>Autre</option>
                   </select>
 
-                  <label class="block text-sm text-slate-500">Date d’expiration</label>
-                  <input id="docExpiryDate" type="date" class="w-full rounded-xl border border-slate-300 px-4 py-2" />
+                  <label for="docExpiryDate" class="block text-sm text-slate-500">Date d’expiration</label>
+                  <input id="docExpiryDate" type="date" class="w-full rounded-xl border border-slate-300 px-4 py-2 focus:ring-4 focus:ring-blue-100 focus:border-blue-600" />
 
-                  <button class="w-full rounded-xl bg-amber-500 text-white px-4 py-3 font-bold hover:bg-amber-600">
+                  <button class="w-full rounded-xl bg-amber-500 text-white px-4 py-3 font-bold hover:bg-amber-600 disabled:opacity-60 disabled:cursor-not-allowed">
                     Ajouter document
                   </button>
                 </form>
@@ -370,12 +402,17 @@
                 <h3 class="text-xl font-black mb-4">Créer un utilisateur</h3>
 
                 <form id="userForm" class="space-y-3">
-                  <input id="userFirstName" placeholder="Prénom" required class="w-full rounded-xl border border-slate-300 px-4 py-2" />
-                  <input id="userLastName" placeholder="Nom" required class="w-full rounded-xl border border-slate-300 px-4 py-2" />
-                  <input id="userEmail" type="email" placeholder="Adresse e-mail" required class="w-full rounded-xl border border-slate-300 px-4 py-2" />
-                  <input id="userPassword" type="password" placeholder="Mot de passe" required class="w-full rounded-xl border border-slate-300 px-4 py-2" />
+                  <label for="userFirstName" class="sr-only">Prénom</label>
+                  <input id="userFirstName" placeholder="Prénom" required class="w-full rounded-xl border border-slate-300 px-4 py-2 focus:ring-4 focus:ring-blue-100 focus:border-blue-600" />
+                  <label for="userLastName" class="sr-only">Nom</label>
+                  <input id="userLastName" placeholder="Nom" required class="w-full rounded-xl border border-slate-300 px-4 py-2 focus:ring-4 focus:ring-blue-100 focus:border-blue-600" />
+                  <label for="userEmail" class="sr-only">Adresse e-mail</label>
+                  <input id="userEmail" type="email" placeholder="Adresse e-mail" autocomplete="email" required class="w-full rounded-xl border border-slate-300 px-4 py-2 focus:ring-4 focus:ring-blue-100 focus:border-blue-600" />
+                  <label for="userPassword" class="sr-only">Mot de passe</label>
+                  <input id="userPassword" type="password" placeholder="Mot de passe" autocomplete="new-password" required class="w-full rounded-xl border border-slate-300 px-4 py-2 focus:ring-4 focus:ring-blue-100 focus:border-blue-600" />
 
-                  <select id="userRole" class="w-full rounded-xl border border-slate-300 px-4 py-2">
+                  <label for="userRole" class="sr-only">Rôle utilisateur</label>
+                  <select id="userRole" class="w-full rounded-xl border border-slate-300 px-4 py-2 focus:ring-4 focus:ring-blue-100 focus:border-blue-600">
                     <option value="ADMIN">Administrateur</option>
                     <option value="COMMANDANT">Commandant</option>
                     <option value="RESPONSABLE_UNITE">Responsable unité</option>
@@ -387,7 +424,7 @@
                     E-mail confirmé
                   </label>
 
-                  <button class="w-full rounded-xl bg-blue-700 text-white px-4 py-3 font-bold hover:bg-blue-800">
+                  <button class="w-full rounded-xl bg-blue-700 text-white px-4 py-3 font-bold hover:bg-blue-800 disabled:opacity-60 disabled:cursor-not-allowed">
                     Créer utilisateur
                   </button>
                 </form>
@@ -420,77 +457,72 @@
   </section>
 
   <!-- MODALE AGENT -->
-  <div id="agentModal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
-    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl p-6">
+  <div id="agentModal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50" role="dialog" aria-modal="true" aria-labelledby="agentModalTitle">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-3xl p-6 max-h-[92vh] overflow-auto">
       <div class="flex justify-between items-center mb-4">
         <h3 id="agentModalTitle" class="text-xl font-black">Ajouter un agent</h3>
-        <button id="closeAgentModalBtn" class="text-slate-500 hover:text-slate-900 text-3xl leading-none">&times;</button>
+        <button id="closeAgentModalBtn" class="text-slate-500 hover:text-slate-900 text-3xl leading-none" aria-label="Fermer la fenêtre agent">&times;</button>
       </div>
 
       <form id="agentForm" class="grid grid-cols-1 md:grid-cols-2 gap-4">
         <input type="hidden" id="agentId" />
 
         <div>
-          <label class="block text-sm font-semibold mb-1">Matricule policier *</label>
-          <input id="matricule" required class="w-full rounded-xl border border-slate-300 px-4 py-2" />
+          <label for="matricule" class="block text-sm font-semibold mb-1">Matricule policier *</label>
+          <input id="matricule" required class="w-full rounded-xl border border-slate-300 px-4 py-2 focus:ring-4 focus:ring-blue-100 focus:border-blue-600" />
         </div>
 
         <div>
-          <label class="block text-sm font-semibold mb-1">Nom *</label>
-          <input id="lastName" required class="w-full rounded-xl border border-slate-300 px-4 py-2" />
+          <label for="lastName" class="block text-sm font-semibold mb-1">Nom *</label>
+          <input id="lastName" required class="w-full rounded-xl border border-slate-300 px-4 py-2 focus:ring-4 focus:ring-blue-100 focus:border-blue-600" />
         </div>
 
         <div>
-          <label class="block text-sm font-semibold mb-1">Prénom *</label>
-          <input id="firstName" required class="w-full rounded-xl border border-slate-300 px-4 py-2" />
+          <label for="firstName" class="block text-sm font-semibold mb-1">Prénom *</label>
+          <input id="firstName" required class="w-full rounded-xl border border-slate-300 px-4 py-2 focus:ring-4 focus:ring-blue-100 focus:border-blue-600" />
         </div>
 
         <div>
-          <label class="block text-sm font-semibold mb-1">Grade *</label>
-          <input id="grade" required class="w-full rounded-xl border border-slate-300 px-4 py-2" />
+          <label for="grade" class="block text-sm font-semibold mb-1">Grade *</label>
+          <input id="grade" required class="w-full rounded-xl border border-slate-300 px-4 py-2 focus:ring-4 focus:ring-blue-100 focus:border-blue-600" />
         </div>
 
         <div>
-          <label class="block text-sm font-semibold mb-1">Fonction *</label>
-          <input id="functionName" required class="w-full rounded-xl border border-slate-300 px-4 py-2" />
+          <label for="functionName" class="block text-sm font-semibold mb-1">Fonction *</label>
+          <input id="functionName" required class="w-full rounded-xl border border-slate-300 px-4 py-2 focus:ring-4 focus:ring-blue-100 focus:border-blue-600" />
         </div>
 
         <div>
-          <label class="block text-sm font-semibold mb-1">Unité / Compagnie *</label>
-          <input id="unit" required class="w-full rounded-xl border border-slate-300 px-4 py-2" />
+          <label for="unit" class="block text-sm font-semibold mb-1">Unité / Compagnie *</label>
+          <input id="unit" required class="w-full rounded-xl border border-slate-300 px-4 py-2 focus:ring-4 focus:ring-blue-100 focus:border-blue-600" />
         </div>
 
         <div>
-          <label class="block text-sm font-semibold mb-1">Statut</label>
-          <select id="status" class="w-full rounded-xl border border-slate-300 px-4 py-2">
+          <label for="status" class="block text-sm font-semibold mb-1">Statut</label>
+          <select id="status" class="w-full rounded-xl border border-slate-300 px-4 py-2 focus:ring-4 focus:ring-blue-100 focus:border-blue-600">
             <option>Actif</option>
             <option>Inactif</option>
           </select>
         </div>
 
         <div>
-          <label class="block text-sm font-semibold mb-1">Position actuelle</label>
-          <select id="position" class="w-full rounded-xl border border-slate-300 px-4 py-2">
-            <option>Present</option>
-            <option>Absence justifiee</option>
-            <option>Absence injustifiee</option>
-            <option>Maladie</option>
-          </select>
+          <label for="position" class="block text-sm font-semibold mb-1">Position actuelle</label>
+          <select id="position" class="w-full rounded-xl border border-slate-300 px-4 py-2 focus:ring-4 focus:ring-blue-100 focus:border-blue-600"></select>
         </div>
 
         <div>
-          <label class="block text-sm font-semibold mb-1">Date d’intégration</label>
-          <input id="integrationDate" type="date" class="w-full rounded-xl border border-slate-300 px-4 py-2" />
+          <label for="integrationDate" class="block text-sm font-semibold mb-1">Date d’intégration</label>
+          <input id="integrationDate" type="date" class="w-full rounded-xl border border-slate-300 px-4 py-2 focus:ring-4 focus:ring-blue-100 focus:border-blue-600" />
         </div>
 
         <div>
-          <label class="block text-sm font-semibold mb-1">E-mail</label>
-          <input id="agentEmail" type="email" class="w-full rounded-xl border border-slate-300 px-4 py-2" />
+          <label for="agentEmail" class="block text-sm font-semibold mb-1">E-mail</label>
+          <input id="agentEmail" type="email" autocomplete="email" class="w-full rounded-xl border border-slate-300 px-4 py-2 focus:ring-4 focus:ring-blue-100 focus:border-blue-600" />
         </div>
 
         <div class="md:col-span-2">
-          <label class="block text-sm font-semibold mb-1">Notes</label>
-          <textarea id="notes" rows="3" class="w-full rounded-xl border border-slate-300 px-4 py-2"></textarea>
+          <label for="notes" class="block text-sm font-semibold mb-1">Notes</label>
+          <textarea id="notes" rows="3" class="w-full rounded-xl border border-slate-300 px-4 py-2 focus:ring-4 focus:ring-blue-100 focus:border-blue-600"></textarea>
         </div>
 
         <div class="md:col-span-2 flex justify-end gap-3 pt-4">
@@ -498,33 +530,64 @@
             Annuler
           </button>
 
-          <button type="submit" class="rounded-xl bg-blue-700 text-white px-4 py-2 font-bold hover:bg-blue-800">
+          <button id="saveAgentBtn" type="submit" class="rounded-xl bg-blue-700 text-white px-4 py-2 font-bold hover:bg-blue-800 disabled:opacity-60 disabled:cursor-not-allowed">
             Enregistrer
           </button>
         </div>
       </form>
 
-      <p id="agentError" class="hidden mt-3 rounded-xl bg-red-50 text-red-700 px-4 py-3 text-sm"></p>
+      <p id="agentError" class="hidden mt-3 rounded-xl bg-red-50 text-red-700 px-4 py-3 text-sm font-semibold" role="alert"></p>
     </div>
   </div>
 
   <!-- MODALE INFO -->
-  <div id="infoModal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
+  <div id="infoModal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50" role="dialog" aria-modal="true" aria-labelledby="infoTitle">
     <div class="bg-white rounded-2xl shadow-2xl w-full max-w-4xl p-6">
       <div class="flex justify-between items-center mb-4">
         <h3 id="infoTitle" class="text-xl font-black">Informations</h3>
-        <button id="closeInfoModalBtn" class="text-slate-500 hover:text-slate-900 text-3xl leading-none">&times;</button>
+        <button id="closeInfoModalBtn" class="text-slate-500 hover:text-slate-900 text-3xl leading-none" aria-label="Fermer la fenêtre d’information">&times;</button>
       </div>
 
       <div id="infoContent" class="max-h-[70vh] overflow-auto"></div>
     </div>
   </div>
 
+  <!-- MODALE CONFIRMATION -->
+  <div id="confirmModal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-[60]" role="dialog" aria-modal="true" aria-labelledby="confirmTitle">
+    <div class="bg-white rounded-2xl shadow-2xl w-full max-w-md p-6">
+      <h3 id="confirmTitle" class="text-xl font-black">Confirmation</h3>
+      <p id="confirmMessage" class="text-slate-600 mt-3 leading-relaxed"></p>
+      <div class="flex justify-end gap-3 mt-6">
+        <button id="confirmCancelBtn" class="rounded-xl border border-slate-300 px-4 py-2 font-bold hover:bg-slate-100">Annuler</button>
+        <button id="confirmOkBtn" class="rounded-xl bg-red-600 text-white px-4 py-2 font-bold hover:bg-red-700">Confirmer</button>
+      </div>
+    </div>
+  </div>
+
   <script>
+    const POSITIONS = [
+      "Présent",
+      "Absence justifiée",
+      "Absence injustifiée",
+      "Maladie"
+    ];
+
+    const POSITION_ALIASES = {
+      "Present": "Présent",
+      "Présent": "Présent",
+      "Absence justifiee": "Absence justifiée",
+      "Absence justifiée": "Absence justifiée",
+      "Absence injustifiee": "Absence injustifiée",
+      "Absence injustifiée": "Absence injustifiée",
+      "Maladie": "Maladie"
+    };
+
     const state = {
       agents: [],
       data: {},
-      currentSection: "dashboard"
+      currentSection: "dashboard",
+      isLoading: false,
+      confirmResolver: null
     };
 
     const sectionTitles = {
@@ -551,13 +614,72 @@
         .replaceAll("'", "&#039;");
     }
 
+    function normalizePosition(value) {
+      return POSITION_ALIASES[value] || value || "Présent";
+    }
+
+    function positionBadge(position) {
+      const normalized = normalizePosition(position);
+      const classes = {
+        "Présent": "bg-emerald-100 text-emerald-700",
+        "Absence justifiée": "bg-amber-100 text-amber-700",
+        "Absence injustifiée": "bg-red-100 text-red-700",
+        "Maladie": "bg-purple-100 text-purple-700"
+      };
+
+      return `<span class="inline-flex items-center rounded-full px-3 py-1 text-xs font-black ${classes[normalized] || "bg-slate-100 text-slate-700"}">${escapeHtml(normalized)}</span>`;
+    }
+
+    function statusBadge(status) {
+      const value = status || "Non renseigné";
+      const cls = value === "Actif" ? "bg-blue-100 text-blue-700" : "bg-slate-100 text-slate-700";
+      return `<span class="inline-flex items-center rounded-full px-3 py-1 text-xs font-black ${cls}">${escapeHtml(value)}</span>`;
+    }
+
+    function buildPositionOptions(selectedValue) {
+      const normalized = normalizePosition(selectedValue);
+      return POSITIONS.map(position => `
+        <option value="${escapeHtml(position)}" ${position === normalized ? "selected" : ""}>${escapeHtml(position)}</option>
+      `).join("");
+    }
+
+    function setLoading(isLoading) {
+      state.isLoading = isLoading;
+      el("loadingState")?.classList.toggle("hidden", !isLoading);
+      document.querySelectorAll("button, input, select, textarea").forEach(control => {
+        if (control.closest("#loginPage") && !isLoading) return;
+        if (control.id === "confirmCancelBtn" || control.id === "confirmOkBtn") return;
+        if (control.type === "hidden") return;
+        control.disabled = isLoading && !control.closest("#loginPage");
+      });
+    }
+
+    function showNotice(message, type = "success") {
+      const box = el("appNotice");
+      if (!box) return;
+
+      const styles = {
+        success: "bg-emerald-50 text-emerald-700 border border-emerald-100",
+        error: "bg-red-50 text-red-700 border border-red-100",
+        info: "bg-blue-50 text-blue-700 border border-blue-100"
+      };
+
+      box.className = `rounded-2xl px-4 py-3 text-sm font-semibold ${styles[type] || styles.info}`;
+      box.textContent = message;
+      box.classList.remove("hidden");
+
+      window.clearTimeout(showNotice.timer);
+      showNotice.timer = window.setTimeout(() => box.classList.add("hidden"), 4500);
+    }
+
     async function api(path, options = {}) {
       const response = await fetch(path, {
         ...options,
         headers: {
           "Content-Type": "application/json",
           ...(options.headers || {})
-        }
+        },
+        credentials: "same-origin"
       });
 
       let payload = {};
@@ -568,7 +690,7 @@
       }
 
       if (!response.ok) {
-        throw new Error(payload.error || "Une erreur est survenue.");
+        throw new Error(payload.error || payload.message || "Une erreur est survenue.");
       }
 
       return payload;
@@ -604,11 +726,8 @@
       el("pageTitle").textContent = sectionTitles[sectionName] || "DSP Personnel";
 
       document.querySelectorAll(".navBtn").forEach(button => {
-        button.classList.remove("bg-slate-800");
-
-        if (button.dataset.section === sectionName) {
-          button.classList.add("bg-slate-800");
-        }
+        button.classList.toggle("bg-slate-800", button.dataset.section === sectionName);
+        button.setAttribute("aria-current", button.dataset.section === sectionName ? "page" : "false");
       });
 
       if (el("mobileNav")) {
@@ -616,30 +735,21 @@
       }
     }
 
-    async function loadDashboard() {
+    async function loadDashboard({ silent = false } = {}) {
       try {
+        if (!silent) setLoading(true);
         const result = await api("/api/bootstrap");
-        state.data = result;
-        state.agents = result.agents || [];
+        state.data = result || {};
+        state.agents = Array.isArray(result?.agents) ? result.agents : [];
 
         renderAll();
         showApp();
         showSection(state.currentSection || "dashboard");
       } catch (error) {
-        showLogin();
+        showLogin(error.message === "Une erreur est survenue." ? "Session expirée ou connexion requise." : error.message);
+      } finally {
+        setLoading(false);
       }
-    }
-
-    function renderAll() {
-      renderStats();
-      renderUnitStats();
-      renderAgents(state.agents);
-      renderAttendance();
-      renderRotations();
-      renderDocuments();
-      renderAlerts();
-      renderUsers();
-      renderLogs();
     }
 
     function renderStats() {
@@ -654,25 +764,26 @@
     function renderUnitStats() {
       const box = el("unitStats");
       const byUnit = state.data.stats?.byUnit || {};
-      const entries = Object.entries(byUnit);
+      const entries = Object.entries(byUnit).sort((a, b) => b[1] - a[1]);
 
       if (!entries.length) {
         box.innerHTML = `<p class="text-slate-500">Aucune donnée.</p>`;
         return;
       }
 
-      const max = Math.max(...entries.map(([, count]) => count), 1);
+      const max = Math.max(...entries.map(([, count]) => Number(count) || 0), 1);
 
       box.innerHTML = entries.map(([unit, count]) => {
-        const width = Math.max(8, Math.round((count / max) * 100));
+        const safeCount = Number(count) || 0;
+        const width = Math.max(8, Math.round((safeCount / max) * 100));
 
         return `
           <div>
             <div class="flex justify-between text-sm mb-1">
-              <span>${escapeHtml(unit)}</span>
-              <span class="font-bold">${count}</span>
+              <span class="font-semibold">${escapeHtml(unit)}</span>
+              <span class="font-black">${safeCount}</span>
             </div>
-            <div class="h-2 bg-slate-100 rounded-full overflow-hidden">
+            <div class="h-2 bg-slate-100 rounded-full overflow-hidden" aria-label="${escapeHtml(unit)}: ${safeCount} agents">
               <div class="h-full bg-blue-700" style="width:${width}%"></div>
             </div>
           </div>
@@ -691,13 +802,13 @@
 
       tbody.innerHTML = visible.map(agent => `
         <tr class="border-b hover:bg-slate-50">
-          <td class="p-3 font-bold">${escapeHtml(agent.matricule)}</td>
+          <td class="p-3 font-black whitespace-nowrap">${escapeHtml(agent.matricule)}</td>
           <td class="p-3">${escapeHtml(agent.lastName)}</td>
           <td class="p-3">${escapeHtml(agent.firstName)}</td>
           <td class="p-3">${escapeHtml(agent.grade)}</td>
           <td class="p-3">${escapeHtml(agent.unit)}</td>
-          <td class="p-3">${escapeHtml(agent.status)}</td>
-          <td class="p-3">${escapeHtml(agent.position)}</td>
+          <td class="p-3">${statusBadge(agent.status)}</td>
+          <td class="p-3">${positionBadge(agent.position)}</td>
           <td class="p-3">
             <div class="flex flex-wrap gap-2">
               <button data-view-agent="${escapeHtml(agent.id)}" class="text-sm rounded-lg border px-3 py-1 font-semibold hover:bg-slate-100">Voir</button>
@@ -720,19 +831,16 @@
 
       tbody.innerHTML = agents.map(agent => `
         <tr class="border-b">
-          <td class="p-3 font-bold">${escapeHtml(agent.matricule)}</td>
+          <td class="p-3 font-black whitespace-nowrap">${escapeHtml(agent.matricule)}</td>
           <td class="p-3">${escapeHtml(agent.firstName)} ${escapeHtml(agent.lastName)}</td>
           <td class="p-3">${escapeHtml(agent.unit)}</td>
           <td class="p-3">
-            <select data-attendance-position="${escapeHtml(agent.matricule)}" class="rounded-xl border border-slate-300 px-3 py-2">
-              <option ${agent.position === "Present" ? "selected" : ""}>Present</option>
-              <option ${agent.position === "Absence justifiee" ? "selected" : ""}>Absence justifiee</option>
-              <option ${agent.position === "Absence injustifiee" ? "selected" : ""}>Absence injustifiee</option>
-              <option ${agent.position === "Maladie" ? "selected" : ""}>Maladie</option>
+            <select data-attendance-position="${escapeHtml(agent.matricule)}" class="rounded-xl border border-slate-300 px-3 py-2 focus:ring-4 focus:ring-blue-100 focus:border-blue-600">
+              ${buildPositionOptions(agent.position)}
             </select>
           </td>
           <td class="p-3">
-            <input data-attendance-reason="${escapeHtml(agent.matricule)}" class="rounded-xl border border-slate-300 px-3 py-2 w-full" placeholder="Justification" />
+            <input data-attendance-reason="${escapeHtml(agent.matricule)}" class="rounded-xl border border-slate-300 px-3 py-2 w-full focus:ring-4 focus:ring-blue-100 focus:border-blue-600" placeholder="Justification" />
           </td>
         </tr>
       `).join("");
@@ -748,10 +856,10 @@
       }
 
       box.innerHTML = rotations.map(rotation => `
-        <div class="border border-slate-200 rounded-xl p-4">
+        <div class="border border-slate-200 rounded-xl p-4 hover:bg-slate-50 transition">
           <div class="flex justify-between gap-3">
             <p class="font-black">${escapeHtml(rotation.team)} - ${escapeHtml(rotation.unit)}</p>
-            <span class="text-sm bg-purple-100 text-purple-700 px-3 py-1 rounded-full">${escapeHtml(rotation.status)}</span>
+            <span class="text-sm bg-purple-100 text-purple-700 px-3 py-1 rounded-full font-bold">${escapeHtml(rotation.status)}</span>
           </div>
           <p class="text-slate-500 mt-1">${escapeHtml(rotation.day)} | ${escapeHtml(rotation.shift)} | Semaine du ${escapeHtml(rotation.weekStart)}</p>
           <p class="text-sm mt-2">Agents : ${escapeHtml((rotation.agentMatricules || []).join(", ") || "Non précisé")}</p>
@@ -769,10 +877,10 @@
       }
 
       box.innerHTML = documents.map(document => `
-        <div class="border border-slate-200 rounded-xl p-4">
+        <div class="border border-slate-200 rounded-xl p-4 hover:bg-slate-50 transition">
           <div class="flex justify-between gap-3">
             <p class="font-black">${escapeHtml(document.title)}</p>
-            <span class="text-sm bg-amber-100 text-amber-700 px-3 py-1 rounded-full">${escapeHtml(document.type)}</span>
+            <span class="text-sm bg-amber-100 text-amber-700 px-3 py-1 rounded-full font-bold">${escapeHtml(document.type)}</span>
           </div>
           <p class="text-slate-500 mt-1">Agent : ${escapeHtml(document.agentMatricule)}</p>
           <p class="text-sm mt-1">Expiration : ${escapeHtml(document.expiryDate || "Non renseignée")}</p>
@@ -791,10 +899,10 @@
       }
 
       box.innerHTML = alerts.map(alert => `
-        <div class="border border-slate-200 rounded-xl p-4">
+        <div class="border border-slate-200 rounded-xl p-4 hover:bg-red-50/40 transition">
           <div class="flex justify-between gap-3">
             <p class="font-black">${escapeHtml(alert.type)}</p>
-            <span class="text-sm bg-red-100 text-red-700 px-3 py-1 rounded-full">${escapeHtml(alert.urgency)}</span>
+            <span class="text-sm bg-red-100 text-red-700 px-3 py-1 rounded-full font-bold">${escapeHtml(alert.urgency)}</span>
           </div>
           <p class="text-slate-500 mt-1">Agent : ${escapeHtml(alert.agentMatricule || "Non applicable")}</p>
           <p class="text-slate-500">Unité : ${escapeHtml(alert.unit || "Non applicable")}</p>
@@ -813,12 +921,12 @@
       }
 
       box.innerHTML = users.map(user => `
-        <div class="border border-slate-200 rounded-xl p-4">
+        <div class="border border-slate-200 rounded-xl p-4 hover:bg-slate-50 transition">
           <p class="font-black">${escapeHtml(user.firstName)} ${escapeHtml(user.lastName)}</p>
           <p class="text-slate-500">${escapeHtml(user.email)}</p>
           <div class="flex flex-wrap gap-2 mt-2">
-            <span class="text-sm bg-blue-100 text-blue-700 px-3 py-1 rounded-full">${escapeHtml(user.role)}</span>
-            <span class="text-sm ${user.emailConfirmed ? "bg-emerald-100 text-emerald-700" : "bg-red-100 text-red-700"} px-3 py-1 rounded-full">
+            <span class="text-sm bg-blue-100 text-blue-700 px-3 py-1 rounded-full font-bold">${escapeHtml(user.role)}</span>
+            <span class="text-sm ${user.emailConfirmed ? "bg-emerald-100 text-emerald-700" : "bg-red-100 text-red-700"} px-3 py-1 rounded-full font-bold">
               ${user.emailConfirmed ? "E-mail confirmé" : "E-mail non confirmé"}
             </span>
           </div>
@@ -833,7 +941,7 @@
       const security = state.data.securityLog || [];
 
       auditBox.innerHTML = audits.length ? audits.map(log => `
-        <div class="border border-slate-200 rounded-xl p-3">
+        <div class="border border-slate-200 rounded-xl p-3 hover:bg-slate-50 transition">
           <p class="font-bold">${escapeHtml(log.action)}</p>
           <p class="text-sm text-slate-500">${escapeHtml(log.date)}</p>
           <p class="text-sm">Auteur : ${escapeHtml(log.author)}</p>
@@ -842,7 +950,7 @@
       `).join("") : `<p class="text-slate-500">Aucun historique.</p>`;
 
       securityBox.innerHTML = security.length ? security.map(log => `
-        <div class="border border-slate-200 rounded-xl p-3">
+        <div class="border border-slate-200 rounded-xl p-3 hover:bg-slate-50 transition">
           <p class="font-bold">${escapeHtml(log.action)} - ${escapeHtml(log.status)}</p>
           <p class="text-sm text-slate-500">${escapeHtml(log.date)}</p>
           <p class="text-sm">Utilisateur : ${escapeHtml(log.userEmail)}</p>
@@ -867,8 +975,10 @@
       el("agentForm").reset();
       el("agentId").value = "";
       el("matricule").disabled = false;
+      el("position").innerHTML = buildPositionOptions("Présent");
       el("agentError").classList.add("hidden");
       el("agentModal").classList.remove("hidden");
+      el("matricule").focus();
     }
 
     function closeAgentModal() {
@@ -888,7 +998,7 @@
         function: el("functionName").value.trim(),
         unit: el("unit").value.trim(),
         status: el("status").value,
-        position: el("position").value,
+        position: normalizePosition(el("position").value),
         integrationDate: el("integrationDate").value,
         email: el("agentEmail").value.trim(),
         notes: el("notes").value.trim()
@@ -896,7 +1006,7 @@
     }
 
     function editAgent(id) {
-      const agent = state.agents.find(item => item.id === id);
+      const agent = state.agents.find(item => String(item.id) === String(id));
       if (!agent) return;
 
       el("agentModalTitle").textContent = "Modifier un agent";
@@ -909,16 +1019,17 @@
       el("functionName").value = agent.function || "";
       el("unit").value = agent.unit || "";
       el("status").value = agent.status || "Actif";
-      el("position").value = agent.position || "Present";
+      el("position").innerHTML = buildPositionOptions(agent.position);
       el("integrationDate").value = agent.integrationDate || "";
       el("agentEmail").value = agent.email || "";
       el("notes").value = agent.notes || "";
       el("agentError").classList.add("hidden");
       el("agentModal").classList.remove("hidden");
+      el("lastName").focus();
     }
 
     function viewAgent(id) {
-      const agent = state.agents.find(item => item.id === id);
+      const agent = state.agents.find(item => String(item.id) === String(id));
       if (!agent) return;
 
       el("infoTitle").textContent = `Fiche agent - ${agent.matricule}`;
@@ -929,7 +1040,9 @@
           <div class="bg-slate-50 rounded-xl p-4"><p class="text-slate-500">Grade</p><p class="font-black">${escapeHtml(agent.grade)}</p></div>
           <div class="bg-slate-50 rounded-xl p-4"><p class="text-slate-500">Fonction</p><p class="font-black">${escapeHtml(agent.function)}</p></div>
           <div class="bg-slate-50 rounded-xl p-4"><p class="text-slate-500">Unité</p><p class="font-black">${escapeHtml(agent.unit)}</p></div>
-          <div class="bg-slate-50 rounded-xl p-4"><p class="text-slate-500">Position</p><p class="font-black">${escapeHtml(agent.position)}</p></div>
+          <div class="bg-slate-50 rounded-xl p-4"><p class="text-slate-500">Statut</p><div class="mt-2">${statusBadge(agent.status)}</div></div>
+          <div class="bg-slate-50 rounded-xl p-4"><p class="text-slate-500">Position</p><div class="mt-2">${positionBadge(agent.position)}</div></div>
+          <div class="bg-slate-50 rounded-xl p-4"><p class="text-slate-500">E-mail</p><p class="font-black">${escapeHtml(agent.email || "Non renseigné")}</p></div>
         </div>
         <div class="mt-4 bg-slate-50 rounded-xl p-4">
           <p class="text-slate-500">Notes</p>
@@ -938,70 +1051,110 @@
       `;
 
       el("infoModal").classList.remove("hidden");
+      el("closeInfoModalBtn").focus();
+    }
+
+    function askConfirmation(message) {
+      el("confirmMessage").textContent = message;
+      el("confirmModal").classList.remove("hidden");
+      el("confirmCancelBtn").focus();
+
+      return new Promise(resolve => {
+        state.confirmResolver = resolve;
+      });
+    }
+
+    function closeConfirmModal(answer) {
+      el("confirmModal").classList.add("hidden");
+      if (state.confirmResolver) {
+        state.confirmResolver(answer);
+        state.confirmResolver = null;
+      }
     }
 
     async function archiveAgent(id) {
-      const agent = state.agents.find(item => item.id === id);
+      const agent = state.agents.find(item => String(item.id) === String(id));
       if (!agent) return;
 
-      if (!confirm(`Archiver l’agent ${agent.matricule} ?`)) return;
+      const confirmed = await askConfirmation(`Archiver l’agent ${agent.matricule} ? Cette action retirera l’agent de l’effectif visible.`);
+      if (!confirmed) return;
 
       try {
+        setLoading(true);
         await api(`/api/agents/${id}`, { method: "DELETE" });
-        await loadDashboard();
+        await loadDashboard({ silent: true });
         showSection("agents");
+        showNotice("Agent archivé avec succès.");
       } catch (error) {
-        alert(error.message);
+        showNotice(error.message, "error");
+      } finally {
+        setLoading(false);
       }
     }
 
     async function saveAttendance() {
       const entries = Array.from(document.querySelectorAll("[data-attendance-position]")).map(select => {
         const matricule = select.dataset.attendancePosition;
-        const reasonInput = Array.from(document.querySelectorAll("[data-attendance-reason]"))
-          .find(input => input.dataset.attendanceReason === matricule);
+        const reasonInput = document.querySelector(`[data-attendance-reason="${CSS.escape(matricule)}"]`);
 
         return {
           matricule,
-          position: select.value,
-          justification: reasonInput ? reasonInput.value : ""
+          position: normalizePosition(select.value),
+          justification: reasonInput ? reasonInput.value.trim() : ""
         };
       });
 
       try {
+        setLoading(true);
         await api("/api/attendance", {
           method: "POST",
           body: JSON.stringify({
             date: el("attendanceDate").value,
-            status: "Validee",
+            status: "Validée",
             entries
           })
         });
 
-        alert("Fiche d’appel validée.");
-        await loadDashboard();
+        showNotice("Fiche d’appel validée avec succès.");
+        await loadDashboard({ silent: true });
         showSection("attendance");
       } catch (error) {
-        alert(error.message);
+        showNotice(error.message, "error");
+      } finally {
+        setLoading(false);
       }
     }
 
     async function logout() {
       try {
+        setLoading(true);
         await api("/api/auth/logout", { method: "POST" });
-      } catch (error) {}
-
-      showLogin();
+      } catch (error) {
+        console.warn(error);
+      } finally {
+        setLoading(false);
+        showLogin();
+      }
     }
 
     function setupEvents() {
       el("loginForm").addEventListener("submit", async event => {
         event.preventDefault();
 
+        const submitBtn = el("loginSubmitBtn");
         el("loginError").classList.add("hidden");
         el("loginError").textContent = "";
 
+        if (!el("email").value.trim() || !el("password").value) {
+          el("loginError").textContent = "Veuillez renseigner l’adresse e-mail et le mot de passe.";
+          el("loginError").classList.remove("hidden");
+          return;
+        }
+
         try {
+          submitBtn.disabled = true;
+          submitBtn.textContent = "Connexion...";
+
           await api("/api/auth/login", {
             method: "POST",
             body: JSON.stringify({
@@ -1014,27 +1167,29 @@
         } catch (error) {
           el("loginError").textContent = error.message || "Connexion impossible.";
           el("loginError").classList.remove("hidden");
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Se connecter";
         }
       });
 
       document.querySelectorAll(".navBtn").forEach(button => {
-        button.addEventListener("click", () => {
-          showSection(button.dataset.section);
-        });
+        button.addEventListener("click", () => showSection(button.dataset.section));
       });
 
-      el("mobileNav").addEventListener("change", event => {
-        showSection(event.target.value);
-      });
+      el("mobileNav").addEventListener("change", event => showSection(event.target.value));
 
       document.querySelectorAll("[data-goto]").forEach(button => {
-        button.addEventListener("click", () => {
-          showSection(button.dataset.goto);
-        });
+        button.addEventListener("click", () => showSection(button.dataset.goto));
       });
 
       document.querySelectorAll("[data-open-agent]").forEach(button => {
         button.addEventListener("click", openAddAgentModal);
+      });
+
+      el("refreshBtn").addEventListener("click", async () => {
+        await loadDashboard();
+        showNotice("Données actualisées.", "info");
       });
 
       el("logoutBtn").addEventListener("click", logout);
@@ -1048,27 +1203,42 @@
       el("cancelAgentBtn").addEventListener("click", closeAgentModal);
       el("closeInfoModalBtn").addEventListener("click", closeInfoModal);
       el("saveAttendanceBtn").addEventListener("click", saveAttendance);
+      el("confirmCancelBtn").addEventListener("click", () => closeConfirmModal(false));
+      el("confirmOkBtn").addEventListener("click", () => closeConfirmModal(true));
+
+      document.addEventListener("keydown", event => {
+        if (event.key !== "Escape") return;
+        closeAgentModal();
+        closeInfoModal();
+        closeConfirmModal(false);
+      });
 
       el("searchAgents").addEventListener("input", () => {
-        const query = el("searchAgents").value.toLowerCase();
+        const query = el("searchAgents").value.toLowerCase().trim();
 
         const filtered = state.agents.filter(agent => [
           agent.matricule,
           agent.lastName,
           agent.firstName,
           agent.grade,
+          agent.function,
           agent.unit,
           agent.status,
-          agent.position
+          normalizePosition(agent.position),
+          agent.email,
+          agent.notes
         ].join(" ").toLowerCase().includes(query));
 
         renderAgents(filtered);
       });
 
       el("agentsTable").addEventListener("click", event => {
-        const viewId = event.target.dataset.viewAgent;
-        const editId = event.target.dataset.editAgent;
-        const archiveId = event.target.dataset.archiveAgent;
+        const target = event.target.closest("button");
+        if (!target) return;
+
+        const viewId = target.dataset.viewAgent;
+        const editId = target.dataset.editAgent;
+        const archiveId = target.dataset.archiveAgent;
 
         if (viewId) viewAgent(viewId);
         if (editId) editAgent(editId);
@@ -1079,34 +1249,44 @@
         event.preventDefault();
 
         const errorBox = el("agentError");
+        const saveBtn = el("saveAgentBtn");
         errorBox.classList.add("hidden");
 
         const id = el("agentId").value;
         const payload = getAgentFormData();
 
-        if (!payload.matricule) {
-          errorBox.textContent = "Le matricule policier est obligatoire.";
+        if (!payload.matricule || !payload.lastName || !payload.firstName || !payload.grade || !payload.function || !payload.unit) {
+          errorBox.textContent = "Veuillez renseigner tous les champs obligatoires.";
           errorBox.classList.remove("hidden");
           return;
         }
 
         try {
+          saveBtn.disabled = true;
+          saveBtn.textContent = "Enregistrement...";
+
           await api(id ? `/api/agents/${id}` : "/api/agents", {
             method: id ? "PUT" : "POST",
             body: JSON.stringify(payload)
           });
 
           closeAgentModal();
-          await loadDashboard();
+          await loadDashboard({ silent: true });
           showSection("agents");
+          showNotice(id ? "Agent modifié avec succès." : "Agent ajouté avec succès.");
         } catch (error) {
           errorBox.textContent = error.message;
           errorBox.classList.remove("hidden");
+        } finally {
+          saveBtn.disabled = false;
+          saveBtn.textContent = "Enregistrer";
         }
       });
 
       el("rotationForm").addEventListener("submit", async event => {
         event.preventDefault();
+        const form = event.currentTarget;
+        const submitBtn = form.querySelector("button[type='submit'], button:not([type])");
 
         const payload = {
           weekStart: el("weekStart").value,
@@ -1115,25 +1295,31 @@
           day: el("day").value,
           shift: el("shift").value.trim(),
           agentMatricules: el("agentMatricules").value.split(",").map(value => value.trim()).filter(Boolean),
-          status: "Planifie"
+          status: "Planifié"
         };
 
         try {
+          submitBtn.disabled = true;
           await api("/api/rotations", {
             method: "POST",
             body: JSON.stringify(payload)
           });
 
-          el("rotationForm").reset();
-          await loadDashboard();
+          form.reset();
+          await loadDashboard({ silent: true });
           showSection("rotations");
+          showNotice("Rotation enregistrée avec succès.");
         } catch (error) {
-          alert(error.message);
+          showNotice(error.message, "error");
+        } finally {
+          submitBtn.disabled = false;
         }
       });
 
       el("documentForm").addEventListener("submit", async event => {
         event.preventDefault();
+        const form = event.currentTarget;
+        const submitBtn = form.querySelector("button[type='submit'], button:not([type])");
 
         const payload = {
           agentMatricule: el("docAgentMatricule").value.trim(),
@@ -1144,21 +1330,27 @@
         };
 
         try {
+          submitBtn.disabled = true;
           await api("/api/documents", {
             method: "POST",
             body: JSON.stringify(payload)
           });
 
-          el("documentForm").reset();
-          await loadDashboard();
+          form.reset();
+          await loadDashboard({ silent: true });
           showSection("documents");
+          showNotice("Document ajouté avec succès.");
         } catch (error) {
-          alert(error.message);
+          showNotice(error.message, "error");
+        } finally {
+          submitBtn.disabled = false;
         }
       });
 
       el("userForm").addEventListener("submit", async event => {
         event.preventDefault();
+        const form = event.currentTarget;
+        const submitBtn = form.querySelector("button[type='submit'], button:not([type])");
 
         const payload = {
           firstName: el("userFirstName").value.trim(),
@@ -1170,22 +1362,27 @@
         };
 
         try {
+          submitBtn.disabled = true;
           await api("/api/users", {
             method: "POST",
             body: JSON.stringify(payload)
           });
 
-          el("userForm").reset();
+          form.reset();
           el("userEmailConfirmed").checked = true;
-          await loadDashboard();
+          await loadDashboard({ silent: true });
           showSection("users");
+          showNotice("Utilisateur créé avec succès.");
         } catch (error) {
-          alert(error.message);
+          showNotice(error.message, "error");
+        } finally {
+          submitBtn.disabled = false;
         }
       });
     }
 
     function init() {
+      el("position").innerHTML = buildPositionOptions("Présent");
       setupEvents();
 
       if (el("attendanceDate")) {
