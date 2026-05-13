@@ -608,23 +608,6 @@ async function api(req, res) {
 
   });
 }
-        return send(res, 403, { error: 'Droit administrateur requis.' });
-      }
-
-      const document = {
-        id: uid('doc'),
-        ...(await body(req)),
-        author: `${user.firstName} ${user.lastName}`,
-        createdAt: now(),
-        archived: false
-      };
-
-      data.documents.unshift(document);
-      audit(data, user, 'Document', document.title);
-      save(data);
-
-      return send(res, 200, { document });
-    }
 
     if (req.method === 'POST' && url.pathname === '/api/users') {
       if (!can(user, 'all')) {
