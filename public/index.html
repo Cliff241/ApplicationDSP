@@ -7,6 +7,38 @@
   <title>DSP Police - Management du Personnel</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="/styles.css">
+  <style>
+  .dsp-app-bg {
+    position: relative;
+    background:
+      linear-gradient(135deg, #f8fbff 0%, #eef5ff 45%, #f8fbff 100%);
+  }
+
+  .dsp-app-bg::before {
+    content: "";
+    position: fixed;
+
+    inset: 90px 0 0 18rem;
+
+    background-image: url("/emblem_of_gabon-freelogovectors.net_.png");
+
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 700px;
+
+    opacity: 0.06;
+
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .appSection,
+  header,
+  .bg-white {
+    position: relative;
+    z-index: 1;
+  }
+</style>
 </head>
 
 <body class="min-h-screen bg-slate-100 text-slate-900 antialiased">
