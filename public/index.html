@@ -1361,20 +1361,48 @@
         const form = event.currentTarget;
         const submitBtn = form.querySelector("button[type='submit'], button:not([type])");
 
-        const payload = {
-          agentMatricule: el("docAgentMatricule").value.trim(),
-          title: el("docTitle").value.trim(),
-          type: el("docType").value,
-          expiryDate: el("docExpiryDate").value,
-          version: 1
-        };
+const formData = new FormData();
+
+formData.append(
+  "agentMatricule",
+  el("docAgentMatricule").value.trim()
+);
+
+formData.append(
+  "title",
+  el("docTitle").value.trim()
+);
+
+formData.append(
+  "type",
+  el("docType").value
+);
+
+formData.append(
+  "expiryDate",
+  el("docExpiryDate").value
+);
+
+formData.append(
+  "version",
+  "1"
+);
+
+formData.append(
+  "file",
+  el("docFile").files[0]
+);
 
         try {
           submitBtn.disabled = true;
-          await api("/api/documents", {
-            method: "POST",
-            body: JSON.stringify(payload)
-          });
+         const response = await fetch("/api/documents", {
+  method: "POST",
+  body: formData
+});
+
+if (!response.ok) {
+  throw new Error("Impossible d’ajouter le document.");
+}
 
           form.reset();
           await loadDashboard({ silent: true });
