@@ -391,7 +391,15 @@
                   <input id="docAgentMatricule" placeholder="Matricule agent" required class="w-full rounded-xl border border-slate-300 px-4 py-2 focus:ring-4 focus:ring-blue-100 focus:border-blue-600" />
                   <label for="docTitle" class="sr-only">Titre du document</label>
                   <input id="docTitle" placeholder="Titre du document" required class="w-full rounded-xl border border-slate-300 px-4 py-2 focus:ring-4 focus:ring-blue-100 focus:border-blue-600" />
+<label for="docFile" class="sr-only">Fichier</label>
 
+<input
+  id="docFile"
+  type="file"
+  required
+  accept=".pdf,.jpg,.jpeg,.png,.doc,.docx"
+  class="w-full rounded-xl border border-slate-300 px-4 py-2 focus:ring-4 focus:ring-blue-100 focus:border-blue-600"
+/>
                   <label for="docType" class="sr-only">Type de document</label>
                   <select id="docType" class="w-full rounded-xl border border-slate-300 px-4 py-2 focus:ring-4 focus:ring-blue-100 focus:border-blue-600">
                     <option>Décision d’affectation</option>
