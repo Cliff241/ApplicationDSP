@@ -530,8 +530,84 @@ async function api(req, res) {
       return send(res, 200, { rotation });
     }
 
-    if (req.method === 'POST' && url.pathname === '/api/documents') {
-      if (!can(user, 'all')) {
+   if (req.method === 'POST' && url.pathname === '/api/documents') {
+
+  if (!can(user, 'all')) {
+    return send(res, 403, { error: 'Droit administrateur requis.' });
+  }
+
+  const form = formidable({
+    multiples: false,
+    uploadDir: UPLOADS_DIR,
+    keepExtensions: true
+  });
+
+  return form.parse(req, (err, fields, files) => {
+
+    if (err) {
+      return send(res, 500, {
+        error: 'Erreur upload document.'
+      });
+    }
+
+    const uploadedFile = files.file;
+
+    if (!uploadedFile) {
+      return send(res, 400, {
+        error: 'Aucun fichier envoyé.'
+      });
+    }
+
+    const file = Array.isArray(uploadedFile)
+      ? uploadedFile[0]
+      : uploadedFile;
+
+    const document = {
+      id: uid('doc'),
+
+      agentMatricule:
+        fields.agentMatricule?.[0] || '',
+
+      title:
+        fields.title?.[0] || '',
+
+      type:
+        fields.type?.[0] || '',
+
+      expiryDate:
+        fields.expiryDate?.[0] || '',
+
+      version:
+        Number(fields.version?.[0] || 1),
+
+      author:
+        `${user.firstName} ${user.lastName}`,
+
+      createdAt: now(),
+
+      archived: false,
+
+      fileName: file.originalFilename,
+
+      fileUrl:
+        '/uploads/' + path.basename(file.filepath)
+    };
+
+    data.documents.unshift(document);
+
+    audit(
+      data,
+      user,
+      'Document',
+      document.title
+    );
+
+    save(data);
+
+    return send(res, 200, { document });
+
+  });
+}
         return send(res, 403, { error: 'Droit administrateur requis.' });
       }
 
