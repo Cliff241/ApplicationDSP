@@ -562,6 +562,12 @@ async function api(req, res) {
       ? uploadedFile[0]
       : uploadedFile;
 
+if (!file) {
+  return send(res, 400, {
+    error: 'Fichier manquant.'
+  });
+}
+
     const document = {
       id: uid('doc'),
 
